@@ -1,0 +1,14 @@
+/home/estudiante/ProyectoCine/Spring-Cine/src/main/java/com/robert/service/AdminServiceImpl.java
+/home/estudiante/ProyectoCine/Spring-Cine/src/main/java/com/robert/controller/AdminController.java
+/home/estudiante/ProyectoCine/Spring-Cine/src/main/java/com/robert/model/Admin.java
+/home/estudiante/ProyectoCine/Spring-Cine/src/main/java/com/robert/model/Pelicula.java
+/home/estudiante/ProyectoCine/Spring-Cine/src/main/java/com/robert/service/AdminService.java
+/home/estudiante/ProyectoCine/Spring-Cine/src/main/java/com/robert/CineApplication.java
+/home/estudiante/ProyectoCine/Spring-Cine/src/main/java/com/robert/repository/PeliculaRepository.java
+/home/estudiante/ProyectoCine/Spring-Cine/src/main/java/com/robert/controller/PeliculaController.java
+/home/estudiante/ProyectoCine/Spring-Cine/src/main/java/com/robert/repository/AdminRepository.java
+/home/estudiante/ProyectoCine/Spring-Cine/src/main/java/com/robert/service/PeliculaService.java
+/home/estudiante/ProyectoCine/Spring-Cine/src/main/java/com/robert/service/PeliculaServiceImpl.java
+/home/estudiante/ProyectoCine/Spring-Cine/src/main/java/com/robert/dto/PeliculaDTO.java
+/home/estudiante/ProyectoCine/Spring-Cine/src/main/java/com/robert/dto/AdminDTO.java
+/home/estudiante/ProyectoCine/Spring-Cine/src/main/java/com/robert/exception/ResourceNotFoundException.java
