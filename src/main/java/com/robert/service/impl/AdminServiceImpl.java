@@ -9,8 +9,9 @@ import org.springframework.stereotype.Service;
 
 import com.robert.dto.AdminDTO;
 import com.robert.dto.UserDTO;
-import com.robert.exception.ResourceNotFoundException;
 import com.robert.model.Admin;
+import com.robert.model.Roles;
+import com.robert.model.User;
 import com.robert.repository.AdminRepository;
 import com.robert.repository.UserRepository;
 import com.robert.service.AdminService;
@@ -34,18 +35,26 @@ public class AdminServiceImpl implements AdminService {
 
 	@Override
 	public AdminDTO getAdmin(String usuario) {
-		Admin admin = adminRepository.findById(usuario).get();
-		return new AdminDTO(admin.getUsuario(), admin.getContrasena());
+		if(adminRepository.findById(usuario).isPresent()) {
+			return new AdminDTO(adminRepository.findById(usuario).get().getUsuario(), adminRepository.findById(usuario).get().getContrasena());
+		}else {
+			return null;
+		}
 	}
 
 	@Override
 	public void addAdmin(AdminDTO admin) {
-		adminRepository.save(new Admin(admin.getUsuario(), admin.getContrasena()));		
+		if(!adminRepository.findById(admin.getUsuario()).isPresent()) {
+			adminRepository.save(new Admin(admin.getUsuario(), admin.getContrasena()));		
+		}
 	}
 
 	@Override
 	public void deleteAdmin(String usuario) {
-		adminRepository.delete(adminRepository.findById(usuario).get());		
+		Optional<Admin> userBorrar = adminRepository.findById(usuario);
+		if(userBorrar.isPresent()) {
+			adminRepository.delete(userBorrar.get());		
+		}
 	}
 
 	@Override
@@ -54,41 +63,52 @@ public class AdminServiceImpl implements AdminService {
 	}
 
 	@Override
-	public void updateUser(UserDTO usuario) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
 	public void addModerator(UserDTO moderator) {
-		// TODO Auto-generated method stub
-		
+		if(!userRepository.findById(moderator.getUsuario()).isPresent()) {
+			User newMod = new User(moderator.getUsuario(), moderator.getContrasena(), Roles.MODERATOR);
+			userRepository.save(newMod);		
+		}
 	}
 
 	@Override
 	public List<UserDTO> getAllMods() {
-		// TODO Auto-generated method stub
-		return null;
+		List<User> modsBD = userRepository.findAll();
+		List<UserDTO> mods = new ArrayList<UserDTO>();
+		for(User mod : modsBD) {
+			if(mod.getRol().toString().equals(Roles.MODERATOR.toString())) {
+				mods.add(new UserDTO(mod.getUsuario(), mod.getContrasena(), mod.getRol()));
+			}
+		}
+		return mods;
 	}
 
 	@Override
-	public UserDTO getModerator() {
-		// TODO Auto-generated method stub
-		return null;
+	public UserDTO getModerator(String user) {
+		Optional<User> mod = userRepository.findById(user);
+		if(mod.isPresent() && mod.get().getRol().toString().equals(Roles.MODERATOR.toString())) {
+			return new UserDTO(mod.get().getUsuario(), mod.get().getContrasena(), mod.get().getRol());
+		}else {
+			return null;
+		}
 	}
 
 	@Override
 	public void deleteModerator(String moderator) {
-		// TODO Auto-generated method stub
-		
+		Optional<User> mod = userRepository.findById(moderator);
+		if(mod.isPresent() && mod.get().getRol().toString().equals(Roles.MODERATOR.toString())) {
+			userRepository.delete(mod.get());
+		}
 	}
 
 	@Override
 	public void updateModerator(UserDTO user) {
-		// TODO Auto-generated method stub
-		
+		Optional<User> userBD = userRepository.findById(user.getUsuario());
+		if(userBD.isPresent() && userBD.get().getRol().toString().equals(Roles.MODERATOR.toString())) {
+			User userUpdate = userBD.get();
+			userUpdate.setContrasena(user.getContrasena());
+			userUpdate.setRol(user.getRol());
+			userRepository.save(userUpdate);
+		}
 	}
-	
-	
 
 }

@@ -8,18 +8,17 @@ import com.robert.dto.UserDTO;
 
 public interface AdminService {
 
-	public List<AdminDTO> getAllAdmins();
-	public AdminDTO getAdmin(String usuario);
-	public void addAdmin(AdminDTO admin);
-	public void deleteAdmin(String usuario);
+	List<AdminDTO> getAllAdmins();
+	AdminDTO getAdmin(String usuario);
+	void addAdmin(AdminDTO admin);
+	void deleteAdmin(String usuario);
 	
-	public void deleteUser(String usuario);
-	public void updateUser(UserDTO usuario);
+	void deleteUser(String usuario);
 	
-	public void addModerator(UserDTO moderator);
-	public List<UserDTO> getAllMods();
-	public UserDTO getModerator();
-	public void deleteModerator(String moderator);
-	public void updateModerator(UserDTO user);
+	void addModerator(UserDTO moderator);
+	List<UserDTO> getAllMods();
+	void deleteModerator(String moderator);
+	void updateModerator(UserDTO user);
+	UserDTO getModerator(String user);
 	
 }

@@ -19,39 +19,39 @@ import com.robert.service.MovieService;
 @RestController
 @CrossOrigin(origins = "http://localhost:4200")
 @RequestMapping("/")
-public class PeliculaController {
+public class MovieController {
 	@Autowired
-	private MovieService pservice;
+	private MovieService pService;
 
 	
-	@GetMapping("/filmografia")
+	@GetMapping("/movies")
 	public List<MovieDTO> getAll(){
-		return pservice.getAll();
+		return pService.getAll();
 	}
 	
-	@GetMapping("/filmografias/{director}")
-	public List<MovieDTO> getPelisDirector(@PathVariable String director){
-		return pservice.pelisDirector(director);
+	@GetMapping("/movies/director/{director}")
+	public List<MovieDTO> getMovieByDirector(@PathVariable String director){
+		return pService.pelisDirector(director);
 	}
 	
-	@GetMapping("/filmografia/{titulo}")
-	public MovieDTO getPeliByTitulo(@PathVariable String titulo) {
-		return pservice.findByTitulo(titulo);
+	@GetMapping("/movies/title/{titulo}")
+	public MovieDTO getPeliByTitle(@PathVariable String titulo) {
+		return pService.findByTitulo(titulo);
 	}
 	
-	@PostMapping("/filmografia")
-	public void nuevaPeli(@RequestBody MovieDTO pelicula) {
-		pservice.createNewPeli(pelicula);
+	@PostMapping("/movies")
+	public void nuevaMovie(@RequestBody MovieDTO pelicula) {
+		pService.createNewPeli(pelicula);
 	}
 	
-	@DeleteMapping("/filmografia/{titulo}")
-	public void deletePeli(@PathVariable String titulo) {
-		pservice.deleteByTitulo(titulo);
+	@DeleteMapping("/movie/{titulo}")
+	public void deleteMovie(@PathVariable String titulo) {
+		pService.deleteByTitulo(titulo);
 	}
 	
-	@PutMapping("/filmografia/{titulo}")
-	public void updatePeli(@RequestBody MovieDTO pelicula, @PathVariable String titulo) {
-		pservice.updatePeli(pelicula, titulo);
+	@PutMapping("/movie/{titulo}")
+	public void updateMovie(@RequestBody MovieDTO pelicula, @PathVariable String titulo) {
+		pService.updatePeli(pelicula, titulo);
 	}
 	
 }

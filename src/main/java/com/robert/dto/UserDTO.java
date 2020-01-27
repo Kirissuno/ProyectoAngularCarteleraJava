@@ -1,12 +1,7 @@
 package com.robert.dto;
 
-import javax.persistence.Entity;
-import javax.persistence.Table;
-
 import com.robert.model.Roles;
 
-@Entity
-@Table(name="users")
 public class UserDTO {
 	
 	private String usuario;

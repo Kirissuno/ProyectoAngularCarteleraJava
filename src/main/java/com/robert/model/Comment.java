@@ -11,7 +11,7 @@ import javax.validation.constraints.NotEmpty;
 import com.sun.istack.NotNull;
 
 @Entity
-@Table(name="comentarios")
+@Table(name="comments")
 public class Comment  {
 	
 	@Id
@@ -56,6 +56,13 @@ public class Comment  {
 	}
 	public void setUsuario(String usuario) {
 		this.usuario = usuario;
+	}
+	
+	public Integer getId() {
+		return id;
+	}
+	public void setId(Integer id) {
+		this.id = id;
 	}
 	@Override
 	public String toString() {

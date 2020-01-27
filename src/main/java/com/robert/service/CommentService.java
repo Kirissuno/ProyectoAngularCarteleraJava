@@ -8,6 +8,8 @@ public interface CommentService {
 	
 	void addComment(CommentDTO comment);
 	void deleteComment(CommentDTO comment);
-	List<CommentDTO> getAllCOmments();
+	List<CommentDTO> getAllComments();
+	List<CommentDTO> getLast3Comments();
+	List<CommentDTO> getAllCommentsByMovie(String movieTitle);
 
 }

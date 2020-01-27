@@ -70,7 +70,7 @@ public class MovieServiceImpl implements MovieService {
 
 	@Override
 	public List<MovieDTO> pelisDirector(String director) {
-		List<Movie> pelisBD = prepo.findByDirector(director);
+		List<Movie> pelisBD = prepo.getMoviesByDirector(director);
 		List<MovieDTO> pelisADevolver = new ArrayList<MovieDTO>();
 		for(Movie peli : pelisBD) {
 			pelisADevolver.add(new MovieDTO(peli.getDirector(), peli.getTitulo(), peli.getFecha()));

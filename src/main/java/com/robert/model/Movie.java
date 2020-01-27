@@ -12,7 +12,7 @@ import javax.validation.constraints.NotEmpty;
 import com.sun.istack.NotNull;
 
 @Entity
-@Table(name="peliculas")
+@Table(name="movies")
 public class Movie implements Serializable{
 	
 	/**
