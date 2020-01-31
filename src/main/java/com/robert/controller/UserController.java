@@ -52,7 +52,7 @@ public class UserController {
 	
 	@GetMapping("/movies/users")
 	public List<UserDTO> getAllUsers() {
-		uService.addUser(new UserDTO("robert", "robert", Roles.MODERATOR));
+		System.out.println("users?");
 		return uService.getAllUsers();
 	}
 	
@@ -68,6 +68,7 @@ public class UserController {
 	
 	@PostMapping("/movies/users")
 	public void addUser(@RequestBody UserDTO user) {
+		System.out.println(user.getRol());
 		uService.addUser(user);
 	}
 	

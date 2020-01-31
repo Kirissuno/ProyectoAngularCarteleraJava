@@ -24,7 +24,7 @@ public class MovieServiceImpl implements MovieService {
 		List<Movie> pelisBD = prepo.findAll();
 		List<MovieDTO> pelisDTO = new ArrayList<MovieDTO>();
 		for(Movie peli : pelisBD) {
-			pelisDTO.add(new MovieDTO(peli.getDirector(), peli.getTitulo(), peli.getFecha()));
+			pelisDTO.add(new MovieDTO(peli.getDirector(), peli.getTitulo(), peli.getDescription(), peli.getFecha()));
 		}
 		return pelisDTO;
 	}
@@ -32,12 +32,12 @@ public class MovieServiceImpl implements MovieService {
 	@Override
 	public MovieDTO findByTitulo(String titulo) {
 		Movie peliBD = prepo.findById(titulo).orElseThrow(() -> new ResourceNotFoundException("Pelicula a buscar no existe"));
-		return new MovieDTO(peliBD.getDirector(), peliBD.getTitulo(), peliBD.getFecha());
+		return new MovieDTO(peliBD.getDirector(), peliBD.getTitulo(), peliBD.getDescription(), peliBD.getFecha());
 	}
 
 	@Override
 	public void createNewPeli(MovieDTO pelicula) {
-		Movie peliACrear = new Movie(pelicula.getDirector(), pelicula.getTitulo(), pelicula.getFecha());		
+		Movie peliACrear = new Movie(pelicula.getDirector(), pelicula.getDescription(), pelicula.getTitulo(), pelicula.getFecha());		
 		if(prepo.findById(peliACrear.getTitulo()).isPresent()) {
 			throw new ResourceNotFoundException("Pelicula con ese titulo ya existente");
 		}else {
@@ -62,6 +62,7 @@ public class MovieServiceImpl implements MovieService {
 			Movie peliupdate = prepo.findById(titulo).get();
 			peliupdate.setDirector(pelicula.getDirector());
 			peliupdate.setFecha(pelicula.getFecha());
+			peliupdate.setDescription(pelicula.getDescription());
 			prepo.save(peliupdate);
 		}else {
 			throw new ResourceNotFoundException("Pelicula a actualizar inexistente");
@@ -73,7 +74,7 @@ public class MovieServiceImpl implements MovieService {
 		List<Movie> pelisBD = prepo.getMoviesByDirector(director);
 		List<MovieDTO> pelisADevolver = new ArrayList<MovieDTO>();
 		for(Movie peli : pelisBD) {
-			pelisADevolver.add(new MovieDTO(peli.getDirector(), peli.getTitulo(), peli.getFecha()));
+			pelisADevolver.add(new MovieDTO(peli.getDirector(), peli.getTitulo(), peli.getDescription(), peli.getFecha()));
 		}
 		return pelisADevolver;
 	}

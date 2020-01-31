@@ -19,24 +19,22 @@ public class Movie implements Serializable{
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	@NotEmpty
 	@NotNull
 	private String director;
 	@Id
 	@NotNull
-	@NotEmpty
 	@Column(length = 50)
 	private String titulo;
-	@NotEmpty
 	@NotNull
-	private String description;
+	private String descripcion;
 	@NotNull
 	private Date fecha;
 	
-	public Movie(String director, String titulo, Date fecha) {
+	public Movie(String director, String titulo, String descripcion, Date fecha) {
 		super();
 		this.director = director;
 		this.titulo = titulo;
+		this.descripcion = descripcion;
 		this.fecha = fecha;
 	}
 	public Movie() {
@@ -53,6 +51,13 @@ public class Movie implements Serializable{
 	}
 	public void setTitulo(String titulo) {
 		this.titulo = titulo;
+	}
+	
+	public String getDescription() {
+		return descripcion;
+	}
+	public void setDescription(String description) {
+		this.descripcion = description;
 	}
 	public Date getFecha() {
 		return fecha;

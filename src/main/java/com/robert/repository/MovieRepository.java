@@ -11,13 +11,13 @@ import com.robert.model.Movie;
 @Repository
 public interface MovieRepository extends JpaRepository<Movie, String> {
 	
-	@Query(value = "select * from pelicula where director like %?1%", nativeQuery = true)
+	@Query(value = "select * from movies where director like %?1%", nativeQuery = true)
 	List<Movie> getMoviesByDirector(String director);
 	
-	@Query(value = "select * from pelicula where fecha < now()", nativeQuery = true)
+	@Query(value = "select * from movies where fecha < now()", nativeQuery = true)
 	List<Movie> getExpiredMovies();
 	
-	@Query(value = "select * from pelicula where fecha > now()", nativeQuery = true)
+	@Query(value = "select * from movies where fecha > now()", nativeQuery = true)
 	List<Movie> getValidMovies();
 		
 }

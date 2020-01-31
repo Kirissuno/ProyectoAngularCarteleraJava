@@ -20,11 +20,9 @@ public class Admin implements Serializable {
 	private static final long serialVersionUID = 1L;
 	@Id
 	@NotNull
-	@NotEmpty
 	@Column(length = 50)
 	private String usuario;
 	@NotNull
-	@NotEmpty
 	private String contrasena;
 	public Admin() {
 		super();

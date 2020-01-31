@@ -11,10 +11,10 @@ import com.robert.model.Comment;
 @Repository
 public interface CommentRepository extends JpaRepository<Comment, Integer> {
 	
-	@Query(value = "select * from comentarios where tituloPelicula like ?1", nativeQuery = true)
+	@Query(value = "select * from comments where tituloPelicula like ?1", nativeQuery = true)
 	List<Comment> getByMovieTitle(String title);
 	
-	@Query(value = "select * from comentarios order by id desc limit 3", nativeQuery = true)
+	@Query(value = "select * from comments order by id desc limit 3", nativeQuery = true)
 	List<Comment> getLast3Comments();
 
 }

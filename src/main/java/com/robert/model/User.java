@@ -6,7 +6,6 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
-import javax.validation.constraints.NotEmpty;
 
 import com.sun.istack.NotNull;
 
@@ -21,11 +20,9 @@ public class User implements Serializable {
 	
 	@Id
 	@NotNull
-	@NotEmpty
 	@Column(length = 50)
 	private String usuario;
 	@NotNull
-	@NotEmpty
 	private String contrasena;
 	@NotNull
 	private Roles rol;

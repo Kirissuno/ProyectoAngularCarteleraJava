@@ -19,15 +19,12 @@ public class Comment  {
     protected Integer id;
 	
 	@NotNull
-	@NotEmpty
 	@Column(length = 50)
 	private String tituloPelicula;
 	@NotNull
-	@NotEmpty
 	@Column(length = 100)
 	private String comentario;
 	@NotNull
-	@NotEmpty
 	private String usuario;
 	public Comment() {
 		super();
