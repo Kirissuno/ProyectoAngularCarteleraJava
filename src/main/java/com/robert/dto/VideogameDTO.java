@@ -2,17 +2,17 @@ package com.robert.dto;
 
 import java.sql.Date;
 
-public class MovieDTO {
+public class VideogameDTO {
 	
 	private String director;
 	private String titulo;
 	private String descripcion;
 	private Date fecha;
-	public MovieDTO() {
+	public VideogameDTO() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
-	public MovieDTO(String director, String titulo, String descripcion, Date fecha) {
+	public VideogameDTO(String director, String titulo, String descripcion, Date fecha) {
 		super();
 		this.director = director;
 		this.titulo = titulo;
@@ -31,12 +31,11 @@ public class MovieDTO {
 	public void setTitulo(String titulo) {
 		this.titulo = titulo;
 	}
-	
-	public String getDescription() {
+	public String getDescripcion() {
 		return descripcion;
 	}
-	public void setDescription(String description) {
-		this.descripcion = description;
+	public void setDescripcion(String descripcion) {
+		this.descripcion = descripcion;
 	}
 	public Date getFecha() {
 		return fecha;
@@ -44,6 +43,8 @@ public class MovieDTO {
 	public void setFecha(Date fecha) {
 		this.fecha = fecha;
 	}
+	
+	
 	
 	
 

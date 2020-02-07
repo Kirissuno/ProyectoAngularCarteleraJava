@@ -10,5 +10,6 @@ public interface UserService {
 	List<UserDTO> getAllUsers();
 	void updateUser(UserDTO usuario);
 	void addUser(UserDTO usuario);
+	UserDTO getAdmin(UserDTO admin);
 
 }

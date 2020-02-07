@@ -23,27 +23,27 @@ public class CommentController {
 	@Autowired
 	private CommentService cService;
 	
-	@PostMapping("/movies/comments")
+	@PostMapping("/games/comments")
 	public void addComment(@RequestBody CommentDTO comment) {
 		cService.addComment(comment);
 	}
 	
-	@DeleteMapping("/movies/comment/{comm}")
+	@DeleteMapping("/game/comment/{comm}")
 	public void deleteComment(@RequestBody CommentDTO comm) {
 		cService.deleteComment(comm);
 	}
 	
-	@GetMapping("/movies/comments")
+	@GetMapping("/game/comments")
 	public List<CommentDTO> getAllComments(){
 		return cService.getAllComments();
 	}
 	
-	@GetMapping("/movies/comments/{movie}")
-	public List<CommentDTO> getAllCommentsByMovie(@PathVariable String movie){
-		return cService.getAllCommentsByMovie(movie);
+	@GetMapping("/game/comments/{game}")
+	public List<CommentDTO> getAllCommentsByMovie(@PathVariable String game){
+		return cService.getAllCommentsByGame(game);
 	}
 	
-	@GetMapping("/movies/comments/last3")
+	@GetMapping("/games/comments/last3")
 	public List<CommentDTO> getLast3Comments(){
 		return cService.getLast3Comments();
 	}

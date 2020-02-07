@@ -7,13 +7,12 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
-import javax.validation.constraints.NotEmpty;
 
 import com.sun.istack.NotNull;
 
 @Entity
-@Table(name="movies")
-public class Movie implements Serializable{
+@Table(name="videogames")
+public class Videogame implements Serializable{
 	
 	/**
 	 * 
@@ -30,14 +29,14 @@ public class Movie implements Serializable{
 	@NotNull
 	private Date fecha;
 	
-	public Movie(String director, String titulo, String descripcion, Date fecha) {
+	public Videogame(String director, String titulo, String descripcion, Date fecha) {
 		super();
 		this.director = director;
 		this.titulo = titulo;
 		this.descripcion = descripcion;
 		this.fecha = fecha;
 	}
-	public Movie() {
+	public Videogame() {
 		super();
 	}
 	public String getDirector() {

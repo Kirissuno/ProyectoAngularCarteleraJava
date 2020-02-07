@@ -41,8 +41,8 @@ public class CommentServiceImpl implements CommentService {
 	}
 	
 	@Override
-	public List<CommentDTO> getAllCommentsByMovie(String movieTitle){
-		List<Comment> commentsBD = commentRepository.getByMovieTitle(movieTitle);
+	public List<CommentDTO> getAllCommentsByGame(String gameTitle){
+		List<Comment> commentsBD = commentRepository.getByGameTitle(gameTitle);
 		List<CommentDTO> commentsDTO = new ArrayList<CommentDTO>();
 		for(Comment comm : commentsBD) {
 			commentsDTO.add(new CommentDTO(comm.getTitulo(), comm.getComentario(), comm.getUsuario(), comm.getId()));

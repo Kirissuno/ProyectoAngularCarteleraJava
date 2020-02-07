@@ -8,7 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.robert.dto.UserDTO;
-import com.robert.model.Roles;
+import com.robert.exception.ResourceNotFoundException;
 import com.robert.model.User;
 import com.robert.repository.UserRepository;
 import com.robert.service.UserService;
@@ -39,24 +39,11 @@ public class UserServiceImpl implements UserService {
 		}
 	}
 
-	
-	/**
-	 * No funca
-	 */
 	@Override
 	public void addUser(UserDTO usuario) {
 		Optional<User> userBD = userRepository.findById(usuario.getUsuario());
-		if(!userBD.isPresent()) {
-			Integer rol = null;
-			if(userBD.get().getRol().toString().equals(Roles.NON_REGISTRED.toString())) {
-				rol = 0;
-			}else if(userBD.get().getRol().toString().equals(Roles.REGISTRED.toString())) {
-				rol = 1;
-			}else if(userBD.get().getRol().toString().equals(Roles.MODERATOR.toString())) {
-				rol = 2;
-			}
-			
-			userRepository.save(new User(userBD.get().getUsuario(), userBD.get().getContrasena(), rol));
+		if(!userBD.isPresent()) {			
+			userRepository.save(userBD.get());
 		}
 	}
 
@@ -68,6 +55,17 @@ public class UserServiceImpl implements UserService {
 			users.add(new UserDTO(user.getUsuario(), user.getContrasena(), user.getRol()));
 		}
 		return users;
+	}
+
+	@Override
+	public UserDTO getAdmin(UserDTO admin) {
+		Integer usersBD = userRepository.isAdmin(admin.getUsuario(), admin.getContrasena());
+		if(usersBD > 0) {
+			User user = userRepository.findById(admin.getUsuario()).orElseThrow(() -> new ResourceNotFoundException("No es admin"));
+			return new UserDTO(user.getUsuario(), user.getContrasena(), user.getRol());
+		}else {
+			return null;
+		}
 	}
 
 }

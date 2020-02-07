@@ -25,9 +25,9 @@ public class User implements Serializable {
 	@NotNull
 	private String contrasena;
 	@NotNull
-	private Roles rol;
+	private String rol;
 	
-	public User(String usuario, String contrasena, Roles rol) {
+	public User(String usuario, String contrasena, String rol) {
 		super();
 		this.usuario = usuario;
 		this.contrasena = contrasena;
@@ -37,18 +37,6 @@ public class User implements Serializable {
 	public User() {
 		super();
 		// TODO Auto-generated constructor stub
-	}
-	
-	public User(String usuario2, String contrasena2, Integer rol2) {
-		this.usuario = usuario2;
-		this.contrasena = contrasena2;
-		if(rol2 == 0) {
-			this.rol = Roles.NON_REGISTRED;
-		}else if(rol2 == 1) {
-			this.rol = Roles.REGISTRED;
-		}else if(rol2 == 2) {
-			this.rol = Roles.MODERATOR;
-		}
 	}
 
 	public String getUsuario() {
@@ -63,10 +51,10 @@ public class User implements Serializable {
 	public void setContrasena(String contrasena) {
 		this.contrasena = contrasena;
 	}
-	public Roles getRol() {
+	public String getRol() {
 		return rol;
 	}
-	public void setRol(Roles rol) {
+	public void setRol(String rol) {
 		this.rol = rol;
 	}
 	

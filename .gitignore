@@ -5,30 +5,30 @@
 ### Angular ###
 ## Angular ##
 # compiled output
-dist/
-tmp/
-app/**/*.js
-app/**/*.js.map
+videogames/dist/
+videogames/tmp/
+videogames/app/**/*.js
+videogames/app/**/*.js.map
 
 # dependencies
-node_modules/
-bower_components/
+videogames/node_modules/
+videogames/bower_components/
 
 # IDEs and editors
 .idea/
 
 # misc
-.sass-cache/
-connect.lock/
-coverage/
-libpeerconnection.log/
-npm-debug.log
-testem.log
-typings/
+videogames/.sass-cache/
+videogames/connect.lock/
+videogames/coverage/
+videogames/libpeerconnection.log/
+videogames/npm-debug.log
+videogames/testem.log
+videogames/typings/
 
 # e2e
-e2e/*.js
-e2e/*.map
+videogames/e2e/*.js
+videogames/e2e/*.map
 
 #System Files
 .DS_Store/

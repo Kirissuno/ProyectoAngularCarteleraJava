@@ -6,18 +6,18 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
-import com.robert.model.Movie;
+import com.robert.model.Videogame;
 
 @Repository
-public interface MovieRepository extends JpaRepository<Movie, String> {
+public interface MovieRepository extends JpaRepository<Videogame, String> {
 	
-	@Query(value = "select * from movies where director like %?1%", nativeQuery = true)
-	List<Movie> getMoviesByDirector(String director);
+	@Query(value = "select * from videogames where director like %?1%", nativeQuery = true)
+	List<Videogame> getVideogamesByDirector(String director);
 	
-	@Query(value = "select * from movies where fecha < now()", nativeQuery = true)
-	List<Movie> getExpiredMovies();
+	@Query(value = "select * from videogames where fecha < now()", nativeQuery = true)
+	List<Videogame> getExpiredVideogames();
 	
-	@Query(value = "select * from movies where fecha > now()", nativeQuery = true)
-	List<Movie> getValidMovies();
+	@Query(value = "select * from videogames where fecha > now()", nativeQuery = true)
+	List<Videogame> getValidVideogames();
 		
 }

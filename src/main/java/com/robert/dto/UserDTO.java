@@ -1,14 +1,12 @@
 package com.robert.dto;
 
-import com.robert.model.Roles;
-
 public class UserDTO {
 	
 	private String usuario;
 	private String contrasena;
-	private Roles rol;
+	private String rol;
 	
-	public UserDTO(String usuario, String contrasena, Roles rol) {
+	public UserDTO(String usuario, String contrasena, String rol) {
 		super();
 		this.usuario = usuario;
 		this.contrasena = contrasena;
@@ -32,10 +30,10 @@ public class UserDTO {
 	public void setContrasena(String contrasena) {
 		this.contrasena = contrasena;
 	}
-	public Roles getRol() {
+	public String getRol() {
 		return rol;
 	}
-	public void setRol(Roles rol) {
+	public void setRol(String rol) {
 		this.rol = rol;
 	}
 	

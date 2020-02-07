@@ -10,6 +10,6 @@ public interface CommentService {
 	void deleteComment(CommentDTO comment);
 	List<CommentDTO> getAllComments();
 	List<CommentDTO> getLast3Comments();
-	List<CommentDTO> getAllCommentsByMovie(String movieTitle);
+	List<CommentDTO> getAllCommentsByGame(String gameTitle);
 
 }
