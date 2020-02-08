@@ -15,7 +15,7 @@ public interface UserRepository extends JpaRepository<User, String> {
 	@Query(value = "select * from users where rol like ?1", nativeQuery = true)
 	List<Videogame> getUsersByRole(String rol);
 	
-	@Query(value = "select count(*) from users where usuario like ?1 and password like ?2", nativeQuery = true)
+	@Query(value = "select count(*) from users where usuario like ?1 and password like ?2 and rol like 'admin'", nativeQuery = true)
 	Integer isAdmin(String user, String password);
 
 }

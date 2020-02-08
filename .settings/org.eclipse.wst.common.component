@@ -17,7 +17,7 @@
                         
         
         <property name="java-output-path" value="/Cine/target/classes"/>
-        <property name="context-root" value="Videojuegos"/>
+        <property name="context-root" value="Cine"/>
                     
     
     </wb-module>

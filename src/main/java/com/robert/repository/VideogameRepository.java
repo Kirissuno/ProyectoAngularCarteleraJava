@@ -9,7 +9,7 @@ import org.springframework.stereotype.Repository;
 import com.robert.model.Videogame;
 
 @Repository
-public interface MovieRepository extends JpaRepository<Videogame, String> {
+public interface VideogameRepository extends JpaRepository<Videogame, String> {
 	
 	@Query(value = "select * from videogames where director like %?1%", nativeQuery = true)
 	List<Videogame> getVideogamesByDirector(String director);

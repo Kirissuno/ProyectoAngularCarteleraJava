@@ -11,4 +11,5 @@ public interface VideogameService {
 	void deleteByTitle(String titulo);
 	void updateVideogame(VideogameDTO videogame, String title);
 	List<VideogameDTO> videogamesByDirector(String director);
+	List<VideogameDTO> getUpcommingGames();
 }

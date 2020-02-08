@@ -10,21 +10,31 @@ import org.springframework.stereotype.Service;
 import com.robert.dto.VideogameDTO;
 import com.robert.exception.ResourceNotFoundException;
 import com.robert.model.Videogame;
-import com.robert.repository.MovieRepository;
+import com.robert.repository.VideogameRepository;
 import com.robert.service.VideogameService;
 
 @Service
 public class VideogameServiceImpl implements VideogameService {
 
 	@Autowired
-	private MovieRepository gameRepo;
+	private VideogameRepository gameRepo;
 	
 	@Override
 	public List<VideogameDTO> getAll() {
 		List<Videogame> pelisBD = gameRepo.findAll();
 		List<VideogameDTO> pelisDTO = new ArrayList<VideogameDTO>();
 		for(Videogame peli : pelisBD) {
-			pelisDTO.add(new VideogameDTO(peli.getDirector(), peli.getTitulo(), peli.getDescription(), peli.getFecha()));
+			pelisDTO.add(new VideogameDTO(peli.getDirector(), peli.getTitulo(), peli.getDescription(), peli.getUrlImage(), peli.getFecha()));
+		}
+		return pelisDTO;
+	}
+	
+	@Override
+	public List<VideogameDTO> getUpcommingGames() {
+		List<Videogame> pelisBD = gameRepo.getValidVideogames();
+		List<VideogameDTO> pelisDTO = new ArrayList<VideogameDTO>();
+		for(Videogame peli : pelisBD) {
+			pelisDTO.add(new VideogameDTO(peli.getDirector(), peli.getTitulo(), peli.getDescription(), peli.getUrlImage(), peli.getFecha()));
 		}
 		return pelisDTO;
 	}
@@ -32,12 +42,12 @@ public class VideogameServiceImpl implements VideogameService {
 	@Override
 	public VideogameDTO findByTitle(String titulo) {
 		Videogame gameBD = gameRepo.findById(titulo).orElseThrow(() -> new ResourceNotFoundException("Juego a buscar no existe"));
-		return new VideogameDTO(gameBD.getDirector(), gameBD.getTitulo(), gameBD.getDescription(), gameBD.getFecha());
+		return new VideogameDTO(gameBD.getDirector(), gameBD.getTitulo(), gameBD.getDescription(), gameBD.getUrlImage(), gameBD.getFecha());
 	}
 
 	@Override
 	public void saveVideogame(VideogameDTO videogame) {
-		Videogame newGame = new Videogame(videogame.getDirector(), videogame.getDescripcion(), videogame.getTitulo(), videogame.getFecha());		
+		Videogame newGame = new Videogame(videogame.getDirector(), videogame.getTitulo(), videogame.getDescripcion(), videogame.getUrlImage(), videogame.getFecha());		
 		if(gameRepo.findById(newGame.getTitulo()).isPresent()) {
 			throw new ResourceNotFoundException("Juego con ese titulo ya existente");
 		}else {
@@ -63,6 +73,7 @@ public class VideogameServiceImpl implements VideogameService {
 			updateGame.setDirector(videogame.getDirector());
 			updateGame.setFecha(videogame.getFecha());
 			updateGame.setDescription(videogame.getDescripcion());
+			updateGame.setUrlImage(videogame.getUrlImage());
 			gameRepo.save(updateGame);
 		}else {
 			throw new ResourceNotFoundException("Juego a actualizar inexistente");
@@ -74,7 +85,7 @@ public class VideogameServiceImpl implements VideogameService {
 		List<Videogame> gameBD = gameRepo.getVideogamesByDirector(director);
 		List<VideogameDTO> games= new ArrayList<VideogameDTO>();
 		for(Videogame peli : gameBD) {
-			games.add(new VideogameDTO(peli.getDirector(), peli.getTitulo(), peli.getDescription(), peli.getFecha()));
+			games.add(new VideogameDTO(peli.getDirector(), peli.getTitulo(), peli.getDescription(), peli.getUrlImage(), peli.getFecha()));
 		}
 		return games;
 	}
