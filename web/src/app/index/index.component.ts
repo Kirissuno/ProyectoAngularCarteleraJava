@@ -11,6 +11,8 @@ import { CommentServiceService } from '../services/comment-service.service';
 export class IndexComponent implements OnInit {
   upcomingVideogames : Videogame[];
   lastComments : Comment[];
+  latestGames : Videogame[]; 
+
   constructor(
     private videogameService : VideogameServiceService,
     private commentService : CommentServiceService
@@ -19,6 +21,7 @@ export class IndexComponent implements OnInit {
   ngOnInit(): void {
     this.getUpcommingGames();
     this.getLast3Comments();
+    this.getLatestGames();
   }
 
   getUpcommingGames(){
@@ -29,8 +32,13 @@ export class IndexComponent implements OnInit {
 
   getLast3Comments(){
     this.commentService.getLast3Comments().subscribe( (data) =>{
-      console.log(data)
       this.lastComments = data;
+    } )
+  }
+
+  getLatestGames(){
+    this.videogameService.getLastGames().subscribe( (data) =>{
+      this.latestGames = data;
     } )
   }
 

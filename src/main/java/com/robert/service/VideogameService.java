@@ -12,4 +12,5 @@ public interface VideogameService {
 	void updateVideogame(VideogameDTO videogame, String title);
 	List<VideogameDTO> videogamesByDirector(String director);
 	List<VideogameDTO> getUpcommingGames();
+	List<VideogameDTO> getLastGames();
 }

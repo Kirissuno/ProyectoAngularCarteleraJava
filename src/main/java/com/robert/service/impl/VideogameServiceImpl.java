@@ -38,6 +38,16 @@ public class VideogameServiceImpl implements VideogameService {
 		}
 		return pelisDTO;
 	}
+	
+	@Override
+	public List<VideogameDTO> getLastGames() {
+		List<Videogame> pelisBD = gameRepo.getExpiredVideogames();
+		List<VideogameDTO> pelisDTO = new ArrayList<VideogameDTO>();
+		for(Videogame peli : pelisBD) {
+			pelisDTO.add(new VideogameDTO(peli.getDirector(), peli.getTitulo(), peli.getDescription(), peli.getUrlImage(), peli.getFecha()));
+		}
+		return pelisDTO;
+	}
 
 	@Override
 	public VideogameDTO findByTitle(String titulo) {

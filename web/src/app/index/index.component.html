@@ -40,3 +40,14 @@
         </div>
     </div>
 </div>
+<hr>
+<div class="container">
+    <h2>Latest Videogames</h2>
+    <div *ngFor="let game of latestGames">
+        <div class="lastGames w-100 mb-1" [ngStyle]="{'background-image': 'url(' + game.urlImage + ')'}">
+            <div class="text-center w-50 pl-4 titleLatest display-4">{{game.titulo}}</div>
+            <br>
+            <div class="text-right dateLatest pr-4">{{game.fecha}}</div>
+        </div>
+    </div>
+</div>

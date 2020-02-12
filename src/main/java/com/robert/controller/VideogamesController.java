@@ -34,6 +34,11 @@ public class VideogamesController {
 		return gameService.getUpcommingGames();
 	}
 	
+	@GetMapping("/games/last")
+	public List<VideogameDTO> getAllLastGames(){
+		return gameService.getLastGames();
+	}
+	
 	@GetMapping("/games/director/{director}")
 	public List<VideogameDTO> getGamesByDirector(@PathVariable String director){
 		return gameService.videogamesByDirector(director);

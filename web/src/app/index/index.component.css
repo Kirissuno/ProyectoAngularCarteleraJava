@@ -6,3 +6,19 @@
 .carousel-caption{
     background-color: rgba(0, 0, 0, 0.8);
 }
+
+.lastGames{
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: 0% 20%;
+}
+
+.lastGames .titleLatest{
+    background-color: rgba(0, 0, 0, 0.75);
+    color: white;
+}
+
+.lastGames .dateLatest{
+    background-color: orange;
+    width: 100%;
+}

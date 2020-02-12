@@ -19,4 +19,8 @@ export class VideogameServiceService {
   getUpcommingGames(): Observable<any>{
     return this.http.get(`${this.URLBase}s/upcomming`);
   }
+
+  getLastGames(): Observable<any>{
+    return this.http.get(`${this.URLBase}s/last`);
+  }
 }
