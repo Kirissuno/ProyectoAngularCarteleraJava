@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { LoginService } from '../services/login.service';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { Observable } from 'rxjs';
+import { NgForm } from '@angular/forms';
+import { Router } from '@angular/router';
 
 
 @Component({
@@ -13,19 +15,35 @@ export class NavbarComponent implements OnInit {
 
   logged: boolean;
 
-  constructor(private loginService : LoginService, private modalService:NgbModal) { }
+  isMod : boolean = false;
+
+  email: string;
+  password : string;
+
+  constructor(private loginService : LoginService, private modalService:NgbModal, private router:Router) { }
 
   ngOnInit(): void {
   }
 
-  onSubmit(){
-    console.log("form enviado")
-    this.logged = true;
-    this.closeModal();
+  onSubmit(form : NgForm){
+    if(form.valid){
+      this.loginService.logIn(this.email).subscribe( user => {
+        if(user.contrasena == this.password){
+          this.loginService.logged = true;
+          this.logged = this.loginService.logged;
+          this.closeModal();
+        }
+      })
+    }
+    
   }
 
   logout(){
-    this.logged = false;
+    this.password = "";
+    this.email = "";
+    this.loginService.logged = false;
+    this.logged = this.loginService.logged;
+    this.router.navigate(["/"])
   }
 
   loginModal(modal){

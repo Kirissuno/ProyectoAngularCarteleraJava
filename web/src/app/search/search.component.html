@@ -1,0 +1,40 @@
+<div class="container mt-2">
+    <div class="row mb-4">
+        <div class="col-12 text-center">
+            <p>Search by Game title or Company name</p>
+            <input type="text" [(ngModel)]="gameToFilter" (change)="change()">
+            <button class="btn ml-2" style="background-color: orange;">Search</button>
+        </div>
+    </div>
+    <div class="row">
+        <div *ngIf="noResult" class="col-12 text-center">
+            <p class="text-danger">No results for {{gameToFilter}}</p>
+            <p class="text-warning">Loading all games...</p>
+        </div>
+    </div>
+    <div class="row" *ngIf="videogamesFiltered.length == 0">
+        <div class="col-6" *ngFor="let game of videogames">
+            <div class="card ">
+                <img class="card-img-top" src={{game.urlImage}} alt="Card image cap">
+                <div class="card-body">
+                    <h5 class="card-title">{{game.titulo}}</h5>
+                    <a class="btn btn-primary" [routerLink]="['/game', game.titulo]" >Details</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row" *ngIf="videogamesFiltered.length > 0">
+        <div class="col-6" *ngFor="let game of videogamesFiltered">
+            <div class="card">
+                <img class="card-img-top" src={{game.urlImage}} alt="Card image cap">
+                <div class="card-body">
+                    <h5 class="card-title">{{game.titulo}}</h5>
+                    <p class="card-text">{{game.descripcion}}</p>
+                    <a class="btn btn-primary">Details</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>

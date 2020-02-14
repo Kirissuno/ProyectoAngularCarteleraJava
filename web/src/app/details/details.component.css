@@ -1,0 +1,17 @@
+.infoBody{
+    background-color: rgba(0, 0, 0, 0.698);
+}
+
+.infoBody h2{
+    color: orange;
+}
+
+.infoBody p{
+    color: white;
+}
+
+.commentBody{
+    padding-top: 30px;
+    height: 100px;
+    background-color: rgba(255, 166, 0, 0.774);
+}

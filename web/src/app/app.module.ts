@@ -15,6 +15,7 @@ import { SearchComponent } from './search/search.component';
 import { DetailsComponent } from './details/details.component';
 import { UserCommentsComponent } from './user-comments/user-comments.component';
 import { Error404Component } from './error404/error404.component';
+import { UserManagementComponent } from './user-management/user-management.component';
 
 @NgModule({
   declarations: [
@@ -25,7 +26,8 @@ import { Error404Component } from './error404/error404.component';
     SearchComponent,
     DetailsComponent,
     UserCommentsComponent,
-    Error404Component
+    Error404Component,
+    UserManagementComponent
   ],
   imports: [
     BrowserModule,

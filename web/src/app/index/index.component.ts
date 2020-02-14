@@ -12,7 +12,7 @@ import { CommentServiceService } from '../services/comment-service.service';
 export class IndexComponent implements OnInit {
   upcomingVideogames : Videogame[];
   lastComments : Comment[];
-  latestGames : Videogame[]; 
+  latestGames : Videogame[];
 
   constructor(
     private videogameService : VideogameServiceService,

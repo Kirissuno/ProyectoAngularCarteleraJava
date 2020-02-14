@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import { User } from '../models/user';
 
 @Injectable({
   providedIn: 'root'
@@ -9,13 +10,15 @@ export class LoginService {
 
   private baseURL = "http://localhost:8080/games/user";
 
-  logged : boolean = true;
-  userLogged : string = "";
+  logged : boolean = false;
 
-  constructor(private http : HttpClient) { }
+  user : User;
 
-  logIn(username : string) : Observable<any>{
-    return this.http.get(`${this.baseURL}/${username}`);
+  constructor(private http : HttpClient) {
+  }
+
+  logIn(username : string): Observable<any> {
+    return this.http.get(`${this.baseURL}/${username}`)
   }
 
 

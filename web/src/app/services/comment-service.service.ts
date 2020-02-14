@@ -16,6 +16,10 @@ export class CommentServiceService {
     return this.http.get(`${this.URLBases}`);
   }
 
+  getByGameTitle(title : string): Observable<any>{
+    return this.http.get(`${this.URLBase}s/${title}`)
+  }
+
   getLast3Comments(): Observable<any>{
     return this.http.get(`${this.URLBases}/last3`);
   }

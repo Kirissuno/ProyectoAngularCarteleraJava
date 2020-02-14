@@ -14,7 +14,7 @@ ul {
     float: left;
   }
   
-  li a {
+  li a, .linkLogo {
     display: block;
     color: white;
     text-align: center;

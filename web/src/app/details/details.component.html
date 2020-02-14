@@ -1,0 +1,28 @@
+<div class="container text-center mt-5">
+    <div class="row">
+        <div class="col-6">
+            <img src={{game.urlImage}} class="w-100" alt="">
+        </div>
+        <div class="col-6 infoBody">
+            <h2>{{game.titulo}}</h2>
+            <p>{{game.descripcion}}</p>
+            <p class="position-absolute fixed-bottom text-right mr-5">Release date: {{game.fecha}}</p>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-12">
+            <div class="text-left ml-5">
+                <h2>Comments</h2>
+            </div>
+            <div *ngIf="comments.length == 0" class="bg-dark" style="height: 200px;">
+                <h3 class="text-warning" style="padding-top: 75px;">No comments yet, be the first to comment this game.</h3>
+            </div>
+            <div *ngIf="comments.length > 0">
+                <div *ngFor="let comment of comments" class="commentBody mb-2">
+                    <h5>{{comment.comentario}}</h5>
+                    <p class="position-relative fixed-bottom text-right mr-5">by: {{comment.usuario}}</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
