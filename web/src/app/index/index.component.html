@@ -1,13 +1,13 @@
-<div class="row">
+<div class="row mt-2">
     <div class="col-8">
-        <h3 class="text-center">Upcoming Videogames!</h3>
+        <h1 class="text-center">Upcoming Videogames!</h1>
         <div id="carousel" class="carousel slide" data-ride="carousel">
             <div class="carousel-inner">
                 <div *ngFor="let game of upcomingVideogames; let i=index" class="carousel-item"
                     [ngClass]="{'active': i === 0}">
                     <img class="d-block w-100" style="object-fit: cover;" src={{game.urlImage}}>
                     <div class="carousel-caption">
-                        <h3>{{game.titulo}}</h3>
+                        <h3><span class="titleDetails" [routerLink]="['game', game.titulo]" >{{game.titulo}}</span></h3>
                         <p>{{game.descripcion}}</p>
                         <p style="margin-bottom: -2%;">{{game.fecha}}</p>
                     </div>
@@ -27,9 +27,9 @@
     </div>
     <div class="col-4 text-center">
         <div>
-            <h4>Last comments</h4>
+            <h4>Latest Comments</h4>
             <div *ngFor="let comment of lastComments" class="text-left">
-                <a href="#"><b>{{comment.titulo}}</b></a>
+                <b><span class="titleDetails" [routerLink]="['game', comment.titulo]" >{{comment.titulo}}</span></b>
                 <div class="text-center">
                     <p>{{comment.comentario}}</p>
                 </div>
@@ -41,13 +41,13 @@
     </div>
 </div>
 <hr>
-<div class="container">
+<div class="container mb-3">
     <h2>Latest Videogames</h2>
     <div *ngFor="let game of latestGames">
         <div class="lastGames w-100 mb-1" [ngStyle]="{'background-image': 'url(' + game.urlImage + ')'}">
-            <div class="text-center w-50 pl-4 titleLatest display-4">{{game.titulo}}</div>
+            <div class="text-center w-50 titleLatest display-4"><span class="titleDetails" [routerLink]="['game', game.titulo]" >{{game.titulo}}</span></div>
             <br>
-            <div class="text-right dateLatest pr-4">{{game.fecha}}</div>
+            <div class="text-right dateLatest pr-4 text-dark">{{game.fecha}}</div>
         </div>
     </div>
 </div>

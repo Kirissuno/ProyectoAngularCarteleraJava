@@ -28,7 +28,13 @@ export class NavbarComponent implements OnInit {
     this.logged = false;
   }
 
-  login(modal){
+  loginModal(modal){
+    this.closeModal();
+    this.modalService.open(modal);
+  }
+
+  modalRegister(modal){
+    this.closeModal();
     this.modalService.open(modal);
   }
 

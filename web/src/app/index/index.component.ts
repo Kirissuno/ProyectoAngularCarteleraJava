@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { VideogameServiceService } from '../services/videogame-service.service';
 import { Videogame } from '../models/videogame';
+import { Comment } from '@angular/compiler';
 import { CommentServiceService } from '../services/comment-service.service';
 
 @Component({
@@ -16,9 +17,12 @@ export class IndexComponent implements OnInit {
   constructor(
     private videogameService : VideogameServiceService,
     private commentService : CommentServiceService
-  ) { }
+  ) { 
+    
+  }
 
   ngOnInit(): void {
+    this.latestGames = [];
     this.getUpcommingGames();
     this.getLast3Comments();
     this.getLatestGames();
@@ -38,7 +42,11 @@ export class IndexComponent implements OnInit {
 
   getLatestGames(){
     this.videogameService.getLastGames().subscribe( (data) =>{
-      this.latestGames = data;
+      data.forEach(element => {
+        if(this.latestGames.length < 5){
+          this.latestGames.push(element);
+        }
+      });
     } )
   }
 

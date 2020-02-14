@@ -30,3 +30,7 @@ ul {
     color: white;
     background-color: orange;
   }
+
+  p a{
+    cursor: pointer;
+  }

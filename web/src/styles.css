@@ -1,1 +1,6 @@
 /* You can add global styles to this file, and also import other style files */
+body{
+    background-image: url("https://www.itl.cat/pngfile/big/153-1538185_wallpapers-id-black-and-white-anime-twitter-header.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
+}

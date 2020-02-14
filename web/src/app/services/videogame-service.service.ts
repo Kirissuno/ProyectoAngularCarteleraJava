@@ -16,6 +16,10 @@ export class VideogameServiceService {
     return this.http.get(`${this.URLBase}s`);
   }
 
+  getGamesByCompany(company : string): Observable<any>{
+    return this.http.get(`${this.URLBase}s/director/${company}`)
+  }
+
   getUpcommingGames(): Observable<any>{
     return this.http.get(`${this.URLBase}s/upcomming`);
   }

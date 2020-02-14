@@ -1,5 +1,5 @@
 <div class="navbar navbar-expand-lg bg-dark text-white static-top">
-    <div class="container">
+    <div class="container bg-dark">
         <div class="navbar-brand">
             <img src="https://www.jetpunk.com/img/user-photo-library/23/2357aa2d47-450.png" width="40px" height="auto"
                 alt="">
@@ -7,18 +7,18 @@
         </div>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive"
             aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
-            <i class="fas fa-bars"></i>
+            Menu
         </button>
-        <div class="collapse navbar-collapse" id="navbarResponsive">
+        <div class="collapse navbar-collapse mr-2" id="navbarResponsive">
             <ul class="navbar-nav ml-auto">
                 <li class="nav-item"><a class="nav-link" [routerLink]="['/']"
                         routerLinkActive="router-link-active">Index</a></li>
                 <li class="nav-item"><a class="nav-link" [routerLink]="['/search']"
-                        routerLinkActive="router-link-active">Search By Studio</a></li>
+                        routerLinkActive="router-link-active">Search Games</a></li>
             </ul>
         </div>
         <div *ngIf="!logged">
-            <button (click)="login(modalLogin)" class="btn" style="background-color: orange;">Log In</button>
+            <button (click)="loginModal(modalLogin)" class="btn" style="background-color: orange;">Log In</button>
         </div>
         <div *ngIf="logged">
             <button (click)="logout()" class="btn" style="background-color: rgb(255, 204, 109);">Log Out</button>
@@ -28,7 +28,7 @@
     <ng-template #modalLogin>
         <div class="modal-header">
             <div>
-                <h3>Log In</h3>
+                <h3 class="text-success">LOG IN</h3>
             </div>
         </div>
         <form (ngSubmit)="onSubmit()" #form="ngForm">
@@ -39,15 +39,39 @@
                 <hr>
                 <label for="password">Password</label><br>
                 <input type="password" name="password" id="password">
-
+                <hr>
+                <p>Don't have an account yet? <span (click)="modalRegister(register)" class="text-primary"><a>Register</a> </span></p>
             </div>
             <div class="modal-footer">
                 <button class="btn btn-danger" (click)="closeModal()">Close</button>
                 <button class="btn btn-primary" type="submit">Submit</button>
             </div>
         </form>
-
     </ng-template>
+    <ng-template #register>
+        <div class="modal-header">
+            <div>
+                <h3 class="text-danger">REGISTER</h3>
+            </div>
+        </div>
+        <form (ngSubmit)="onSubmit()" #form="ngForm">
+            <div class="modal-body text-center">
+
+                <label for="email">Email</label><br>
+                <input type="text" name="email" id="email">
+                <hr>
+                <label for="password">Password</label><br>
+                <input type="password" name="password" id="password">
+                <hr>
+                <p>Already have an account? <span (click)="loginModal(modalLogin)" class="text-primary"><a>Log In</a></span></p>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-danger" (click)="closeModal()">Close</button>
+                <button class="btn btn-primary" type="submit">Submit</button>
+            </div>
+        </form>
+    </ng-template>
+    
 
 
 </div>

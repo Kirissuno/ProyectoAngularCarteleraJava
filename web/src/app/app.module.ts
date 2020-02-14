@@ -11,20 +11,28 @@ import { HttpClientModule } from '@angular/common/http';
 
 
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { SearchComponent } from './search/search.component';
+import { DetailsComponent } from './details/details.component';
+import { UserCommentsComponent } from './user-comments/user-comments.component';
+import { Error404Component } from './error404/error404.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     IndexComponent,
     NavbarComponent,
-    FooterComponent
+    FooterComponent,
+    SearchComponent,
+    DetailsComponent,
+    UserCommentsComponent,
+    Error404Component
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     FormsModule,
     HttpClientModule,
-    NgbModule
+    NgbModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

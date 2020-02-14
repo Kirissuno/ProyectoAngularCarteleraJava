@@ -8,6 +8,7 @@
 }
 
 .lastGames{
+    height: auto;
     background-size: cover;
     background-repeat: no-repeat;
     background-position: 0% 20%;
@@ -22,3 +23,9 @@
     background-color: orange;
     width: 100%;
 }
+
+.titleDetails{
+    cursor: pointer;
+    color: orange;
+}
+

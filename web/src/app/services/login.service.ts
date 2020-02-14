@@ -9,7 +9,7 @@ export class LoginService {
 
   private baseURL = "http://localhost:8080/games/user";
 
-  logged : boolean = false;
+  logged : boolean = true;
   userLogged : string = "";
 
   constructor(private http : HttpClient) { }
