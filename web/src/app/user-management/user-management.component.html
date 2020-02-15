@@ -1,1 +1,53 @@
-<p>user-management works!</p>
+<div class="container">
+    <h2>Admins</h2>
+    <div class="row">
+        <div class="col-12" *ngFor="let user of adminUsers">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">{{user.usuario}}</h5>
+                    <div class="text-right">
+                        <button class="btn mr-1" *ngIf="user.usuario != 'admin'" (click)="rolAssign(user.usuario); modalModify(modify)">Change role</button>
+                        <button class="btn" *ngIf="user.usuario != 'admin'" (click)="deleteUser(user.usuario)">Delete user</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <hr>
+    <h2>Other users</h2>
+    <div class="row">
+        <div class="col-12" *ngFor="let user of otherUsers">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">{{user.usuario}}</h5>
+                    <div class="text-right">
+                        <button class="btn mr-1" (click)="rolAssign(user.usuario); modalModify(modify)">Change role</button>
+                        <button class="btn" (click)="deleteUser(user.usuario)">Delete user</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <ng-template #modify>
+        <div class="modal-header">
+            <div>
+                <h3 class="text-warning">Modify</h3>
+            </div>
+            <button type="button" class="close" (click)="closeModal()">&times;</button>
+        </div>
+        <form (ngSubmit)="onSubmit(form)" #form="ngForm">
+            <div class="modal-body text-center">
+                <input type="radio" name="options" [(ngModel)]="rol.options" value="1">
+                USER
+                <input type="radio" name="options" [(ngModel)]="rol.options" value="2">
+                ADMIN
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-primary">Submit</button>
+            </div>
+        </form>
+    </ng-template>
+
+
+</div>

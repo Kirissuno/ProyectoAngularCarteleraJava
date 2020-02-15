@@ -29,7 +29,7 @@ public class CommentController {
 	}
 	
 	@DeleteMapping("/game/comment/{comm}")
-	public void deleteComment(@RequestBody CommentDTO comm) {
+	public void deleteComment(@PathVariable Integer comm) {
 		cService.deleteComment(comm);
 	}
 	

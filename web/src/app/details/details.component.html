@@ -6,6 +6,7 @@
         <div class="col-6 infoBody">
             <h2>{{game.titulo}}</h2>
             <p>{{game.descripcion}}</p>
+            <p class="text-left">Company: {{game.director}}</p>
             <p class="position-absolute fixed-bottom text-right mr-5">Release date: {{game.fecha}}</p>
         </div>
     </div>
@@ -15,14 +16,34 @@
                 <h2>Comments</h2>
             </div>
             <div *ngIf="comments.length == 0" class="bg-dark" style="height: 200px;">
-                <h3 class="text-warning" style="padding-top: 75px;">No comments yet, be the first to comment this game.</h3>
+                <h3 class="text-warning" style="padding-top: 75px;">No comments yet, be the first to comment this game.
+                </h3>
             </div>
             <div *ngIf="comments.length > 0">
                 <div *ngFor="let comment of comments" class="commentBody mb-2">
-                    <h5>{{comment.comentario}}</h5>
-                    <p class="position-relative fixed-bottom text-right mr-5">by: {{comment.usuario}}</p>
+                    
+                    <h5>{{comment.comentario}} <button *ngIf="(isUser && comment.usuario == loggedUser.usuario) || isAdmin " class="btn bg-danger" (click)="deleteComment(comment.id)">X</button></h5>
+                    <p class="position-relative fixed-bottom text-right mr-5">by: {{comment.usuario}}</p>                    
                 </div>
             </div>
         </div>
     </div>
+    <form #form="ngForm" *ngIf="isUser || isAdmin">
+    <div class="row mt-2">
+        <div class="col-10">
+            <h6 class="text-left">Add a new Comment</h6>
+            <input type="text" name="newComment" id="newComment" class="w-100" [(ngModel)]="newComment" minlength="10" maxlength="255"
+                required #textValid="ngModel">
+            <div class="text-danger" *ngIf="textValid.touched || textValid.dirty">
+                <div *ngIf="textValid.errors?.minlength">
+                    Comment must be at least 10 characters long.
+                </div>
+            </div>
+        </div>
+        <div class="col-2">
+            <button (click)="addComment(newComment)" class="w-100 btn btn-primary" style="height: 100%;" [disabled]="form.invalid">Send</button>
+        </div>
+    </div>
+    </form>
+
 </div>

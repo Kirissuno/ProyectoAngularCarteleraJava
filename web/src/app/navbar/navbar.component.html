@@ -1,9 +1,10 @@
 <div class="navbar navbar-expand-lg bg-dark text-white static-top">
     <div class="container bg-dark">
         <div class="navbar-brand">
-            <a [routerLink]="['/']" class="linkLogo"><img src="https://www.jetpunk.com/img/user-photo-library/23/2357aa2d47-450.png" width="40px" height="auto"
-                alt="">
-            Jacagames</a>
+            <a [routerLink]="['/']" class="linkLogo"><img
+                    src="https://www.jetpunk.com/img/user-photo-library/23/2357aa2d47-450.png" width="40px"
+                    height="auto" alt="">
+                Jacagames</a>
         </div>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive"
             aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
@@ -15,7 +16,7 @@
                         routerLinkActive="router-link-active">Index</a></li>
                 <li class="nav-item"><a class="nav-link" [routerLink]="['/search']"
                         routerLinkActive="router-link-active">Search Games</a></li>
-                <li *ngIf="logged" class="nav-item"><a class="nav-link" [routerLink]="['/users']"
+                <li *ngIf="isAdmin" class="nav-item"><a class="nav-link" [routerLink]="['/users']"
                         routerLinkActive="router-link-active">Manage Users</a></li>
             </ul>
         </div>
@@ -37,17 +38,37 @@
         <form (ngSubmit)="onSubmit(form)" #form="ngForm">
             <div class="modal-body text-center">
 
-                <label for="email">Email</label><br>
-                <input type="email" name="email" id="email" [(ngModel)]="email">
+                <label for="user">User</label><br>
+                <input type="text" name="user" id="user" [(ngModel)]="email" required minlength="5"
+                    #userValid="ngModel" />
+                <div *ngIf="userValid.touched || userValid.dirty" class="text-danger">
+                    <div *ngIf="userValid.errors?.minlength">
+                        Username must be at least 5 characters long.
+                    </div>
+                    <div *ngIf="userValid.errors?.required">
+                        Username is required.
+                    </div>
+                </div>
                 <hr>
                 <label for="password">Password</label><br>
-                <input type="password" name="password" id="password" [(ngModel)]="password">
+                <input type="password" name="password" id="password" [(ngModel)]="password" minlength="5" required
+                    #passValid="ngModel" />
+                <div *ngIf="passValid.touched || passValid.dirty" class="text-danger">
+                    <div *ngIf="passValid.errors?.required">
+                        Password is required.
+                    </div>
+                </div>
+                <br>
+                <div *ngIf="errorLogin">
+                    <p class="text-danger">Wrong User/Password</p>
+                </div>
                 <hr>
                 <p>Don't have an account yet? <span (click)="modalRegister(register)"
                         class="text-primary"><a>Register</a> </span></p>
+
             </div>
             <div class="modal-footer">
-                <button class="btn btn-primary">Submit</button>
+                <button class="btn btn-primary" type="submit" [disabled]="form.invalid">Submit</button>
             </div>
         </form>
     </ng-template>
@@ -58,20 +79,47 @@
             </div>
             <button type="button" class="close" (click)="closeModal()">&times;</button>
         </div>
-        <form (ngSubmit)="onSubmit(form)" #form="ngForm">
+        <form #formRegister="ngForm">
             <div class="modal-body text-center">
 
-                <label for="email">Email</label><br>
-                <input type="email" name="email" id="email">
+                <label for="user">Username</label><br>
+                <input type="text" name="user" id="user" [(ngModel)]="email" minlength="5" required
+                    #userValid="ngModel" />
+                <div *ngIf="userValid.touched || userValid.dirty" class="text-danger">
+                    <div *ngIf="userValid.errors?.minlength">
+                        Username must be at least 5 characters long.
+                    </div>
+                    <div *ngIf="userValid.errors?.required">
+                        Username is required.
+                    </div>
+                </div>
+
+
                 <hr>
                 <label for="password">Password</label><br>
-                <input type="password" name="password" id="password">
+                <input type="password" name="password" id="password" [(ngModel)]="password" minlength="5" required
+                    #passValid="ngModel" />
+
+                <div *ngIf="passValid.touched || passValid.dirty" class="text-danger">
+                    <div *ngIf="passValid.errors?.minlength">
+                        Password must be at least 5 characters long.
+                    </div>
+                    <div *ngIf="passValid.errors?.required">
+                        Password is required.
+                    </div>
+                </div>
+                <br>
+                <div *ngIf="errorRegister">
+                    <p class="bg-danger text-light">User already taken</p>
+                </div>
+
                 <hr>
                 <p>Already have an account? <span (click)="loginModal(modalLogin)" class="text-primary"><a>Log
                             In</a></span></p>
             </div>
             <div class="modal-footer">
-                <button class="btn btn-primary" type="submit">Submit</button>
+                <button class="btn btn-primary" type="submit" (click)="onSubmitRegister(formRegister)"
+                    [disabled]="formRegister.invalid">Submit</button>
             </div>
         </form>
     </ng-template>

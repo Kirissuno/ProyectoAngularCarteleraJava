@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import { Comment } from '../models/comment';
 
 @Injectable({
   providedIn: 'root'
@@ -22,5 +23,13 @@ export class CommentServiceService {
 
   getLast3Comments(): Observable<any>{
     return this.http.get(`${this.URLBases}/last3`);
+  }
+
+  addComment(comment:Comment): Observable<any>{
+    return this.http.post(`${this.URLBases}`, comment)
+  }
+
+  deleteComment(commentID:number): Observable<any>{
+    return this.http.delete(`${this.URLBase}/${commentID}`)
   }
 }

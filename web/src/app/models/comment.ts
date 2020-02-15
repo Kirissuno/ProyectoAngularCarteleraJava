@@ -1,6 +1,6 @@
 export interface Comment{
     id : number;
-	tituloJuego : string;
+	titulo : string;
     comentario : string;
     usuario? : string;
 }

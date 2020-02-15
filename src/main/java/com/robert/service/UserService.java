@@ -11,5 +11,6 @@ public interface UserService {
 	void updateUser(UserDTO usuario);
 	void addUser(UserDTO usuario);
 	UserDTO getAdmin(UserDTO admin);
+	void deleteUser(String user);
 
 }

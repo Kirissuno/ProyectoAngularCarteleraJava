@@ -30,7 +30,7 @@ public class Comment  {
 		super();
 		// TODO Auto-generated constructor stub
 	}
-	public Comment(@NotEmpty String titulo, @NotEmpty String comentario, @NotEmpty String usuario) {
+	public Comment( String titulo,  String comentario,  String usuario) {
 		super();
 		this.tituloPelicula = titulo;
 		this.comentario = comentario;

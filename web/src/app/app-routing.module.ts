@@ -13,7 +13,7 @@ const routes: Routes = [
   {path: "", component: IndexComponent},
   {path: "search", component: SearchComponent, canActivate : [AuthGuardService] },
   {path: "profile/:user", component: UserCommentsComponent, canActivate : [AuthGuardService]},
-  {path: "game/:title", component: DetailsComponent, canActivate : [AuthGuardService]},
+  {path: "game/:title", component: DetailsComponent},
   {path: "users", component: UserManagementComponent, canActivate : [AuthGuardService]},
   {path: "**", component: Error404Component}
 ];

@@ -43,7 +43,7 @@ public class UserServiceImpl implements UserService {
 	public void addUser(UserDTO usuario) {
 		Optional<User> userBD = userRepository.findById(usuario.getUsuario());
 		if(!userBD.isPresent()) {			
-			userRepository.save(userBD.get());
+			userRepository.save(new User(usuario.getUsuario(), usuario.getContrasena(), usuario.getRol()));
 		}
 	}
 
@@ -66,6 +66,11 @@ public class UserServiceImpl implements UserService {
 		}else {
 			return null;
 		}
+	}
+	
+	@Override
+	public void deleteUser(String user) {
+		userRepository.delete(userRepository.findById(user).orElseThrow(() -> new ResourceNotFoundException("Usuario inexistente")));
 	}
 
 }

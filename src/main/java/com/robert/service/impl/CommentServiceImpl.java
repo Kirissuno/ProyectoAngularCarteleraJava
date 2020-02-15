@@ -23,8 +23,8 @@ public class CommentServiceImpl implements CommentService {
 	}
 
 	@Override
-	public void deleteComment(CommentDTO comment) {
-		Optional<Comment> comm = commentRepository.findById(comment.getId());
+	public void deleteComment(Integer commentID) {
+		Optional<Comment> comm = commentRepository.findById(commentID);
 		if(comm.isPresent()) {
 			commentRepository.delete(comm.get());
 		}
