@@ -4,6 +4,8 @@
             <p>Search by Game title or Company name</p>
             <input type="text" [(ngModel)]="gameToFilter" (change)="change()">
             <button class="btn ml-2" style="background-color: orange;">Search</button>
+            <br>
+            <a class="btn btn-success float-right" *ngIf="isAdmin" (click)="addGame(modalNew)">Add new Game</a>
         </div>
     </div>
     <div class="row">
@@ -18,7 +20,8 @@
                 <img class="card-img-top" src={{game.urlImage}} alt="Card image cap">
                 <div class="card-body">
                     <h5 class="card-title">{{game.titulo}}</h5>
-                    <a class="btn btn-primary" [routerLink]="['/game', game.titulo]" >Details</a>
+                    <a class="btn btn-primary" [routerLink]="['/game', game.titulo]">Details</a>
+                    <a class="btn btn-danger ml-1" *ngIf="isAdmin" (click)="deleteGame(game.titulo)">Delete</a>
                 </div>
             </div>
         </div>
@@ -36,5 +39,70 @@
             </div>
         </div>
     </div>
+
+
+    <ng-template #modalNew>
+        <div class="modal-header">
+            <h2>New game form</h2>
+        </div>
+        <form [formGroup]="newGameForm" (ngSubmit)="onSubmitNew(submitSuccess)">
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-12 text-center form-group">
+                        <label for="title">Title</label><br>
+                        <input class="form-control" type="text" name="title" id="title" formControlName="title"
+                            maxlength="255">
+                        <div *ngIf="newGameForm.controls.title.invalid && (newGameForm.controls.title.touched || newGameForm.controls.title.dirty)"
+                            class="bg-danger text-light">
+                            Min length 5, max 255 and it's required.
+                        </div>
+                        <br>
+                        <label for="company">Company</label><br>
+                        <input class="form-control" type="text" name="company" id="company" formControlName="company">
+                        <div *ngIf="newGameForm.controls.company.invalid && (newGameForm.controls.company.touched || newGameForm.controls.company.dirty)"
+                            class="bg-danger text-light">
+                            Min length 5, max 255 and it's required.
+                        </div>
+                        <br>
+                        <label for="description">Description</label><br>
+                        <input class="form-control" type="text" name="description" id="description"
+                            formControlName="description">
+                        <div *ngIf="newGameForm.controls.description.invalid && (newGameForm.controls.description.touched || newGameForm.controls.description.dirty)"
+                            class="bg-danger text-light">
+                            Min length 5, max 255 and it's required.
+                        </div>
+                        <br>
+                        <label for="imageURL">Image URL</label><br>
+                        <input class="form-control" type="text" name="imageURL" id="imageURL"
+                            formControlName="imageURL">
+                        <div *ngIf="newGameForm.controls.imageURL.invalid && (newGameForm.controls.imageURL.touched || newGameForm.controls.imageURL.dirty)"
+                            class="bg-danger text-light">
+                            Must be a valid URL of an PNG or JPG image.
+                        </div>
+                        <br>
+                        <label for="releaseDate">Release date</label><br>
+                        <input class="form-control" type="date" name="releaseDate" id="releaseDate"
+                            formControlName="releaseDate">
+                        <div *ngIf="newGameForm.controls.releaseDate.invalid && (newGameForm.controls.releaseDate.touched || newGameForm.controls.releaseDate.dirty)"
+                            class="bg-danger text-light">
+                            Date is required.
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <div *ngIf="errorNew" class="text-danger">Already a game with that title</div>
+                <button type="button" class="btn btn-outline-dark" (click)="closeModals()">Close</button>
+                <input class="btn btn-primary" type="submit" [disabled]="!newGameForm.valid" value="Submit">
+            </div>
+        </form>
+    </ng-template>
+
+    <ng-template #submitSuccess>
+        <div class="modal-body text-center text-success">
+            <h3>This videogame has been added</h3>
+        </div>
+    </ng-template>
+
 
 </div>
