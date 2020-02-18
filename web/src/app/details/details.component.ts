@@ -35,12 +35,13 @@ export class DetailsComponent implements OnInit {
     this.comments = [];
   }
 
+  //Iniciamos las variables de para obtener el rol del usuario admin/user y cargamos el juego de la base de datos en una variable local.
   ngOnInit(): void {
     if(this.loginSerice.user != null){
       this.loggedUser = this.loginSerice.user;
       if(this.loggedUser.rol == 'user'){
         this.isUser = true;
-      }else{
+      }else if(this.loggedUser.rol == 'admin'){
         this.isAdmin = true;
       }
     }
@@ -51,17 +52,19 @@ export class DetailsComponent implements OnInit {
       if(gameDB != null || gameDB != undefined){
         this.game = gameDB;
       }
-    } )
+    })
     this.getAllCommentsByTitle();
     
   }
 
+  //Método para obtener todos los comentarios de un videojuego, por su título.
   getAllCommentsByTitle(){
     this.commentService.getByGameTitle(this.gameTitle).subscribe( comms => {
       this.comments = comms;
     } )
   }
 
+  //Método que crea un nuevo objeto de tipo comentario que será añadido a la base de datos.
   addComment(comment:string){
     const newComment : Comment = {
       id : null,
@@ -75,6 +78,7 @@ export class DetailsComponent implements OnInit {
     });
   }
 
+  //Método para borrar un comentario
   deleteComment(id){
     this.commentService.deleteComment(id).subscribe( () => {
       this.getAllCommentsByTitle();

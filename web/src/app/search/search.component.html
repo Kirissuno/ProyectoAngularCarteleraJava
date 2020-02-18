@@ -77,7 +77,7 @@
                             formControlName="imageURL">
                         <div *ngIf="newGameForm.controls.imageURL.invalid && (newGameForm.controls.imageURL.touched || newGameForm.controls.imageURL.dirty)"
                             class="bg-danger text-light">
-                            Must be a valid URL of an PNG or JPG image.
+                            Must be a valid URL of an PNG or JPG image (and max length of 255).
                         </div>
                         <br>
                         <label for="releaseDate">Release date</label><br>

@@ -28,18 +28,21 @@ export class IndexComponent implements OnInit {
     this.getLatestGames();
   }
 
+  //Cargamos el array de los juegos que están por venir, estos se mostrarán en la diapositiva del index.
   getUpcommingGames(){
     this.videogameService.getUpcommingGames().subscribe( (data) =>{
       this.upcomingVideogames = data;
     } )
   }
 
+  //Cargamos los últimos 3 objetos de comentarios para mostrarlos en el index.
   getLast3Comments(){
     this.commentService.getLast3Comments().subscribe( (data) =>{
       this.lastComments = data;
     } )
   }
 
+  //Cargamos los últimos juegos lanzados para mostrarlos en la parte inferior del index (estos estarán capados a 5 elementos).
   getLatestGames(){
     this.videogameService.getLastGames().subscribe( (data) =>{
       data.forEach(element => {

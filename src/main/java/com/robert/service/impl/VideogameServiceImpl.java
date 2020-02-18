@@ -51,8 +51,13 @@ public class VideogameServiceImpl implements VideogameService {
 
 	@Override
 	public VideogameDTO findByTitle(String titulo) {
-		Videogame gameBD = gameRepo.findById(titulo).orElseThrow(() -> new ResourceNotFoundException("Juego a buscar no existe"));
-		return new VideogameDTO(gameBD.getDirector(), gameBD.getTitulo(), gameBD.getDescription(), gameBD.getUrlImage(), gameBD.getFecha());
+		Optional<Videogame> gameBbDd = gameRepo.findById(titulo);
+		if(gameBbDd.isPresent()) {
+			Videogame gameBD = gameBbDd.get();
+			return new VideogameDTO(gameBD.getDirector(), gameBD.getTitulo(), gameBD.getDescription(), gameBD.getUrlImage(), gameBD.getFecha());
+		}else {
+			return null;
+		}
 	}
 
 	@Override

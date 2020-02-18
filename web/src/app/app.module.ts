@@ -13,7 +13,6 @@ import { HttpClientModule } from '@angular/common/http';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { SearchComponent } from './search/search.component';
 import { DetailsComponent } from './details/details.component';
-import { UserCommentsComponent } from './user-comments/user-comments.component';
 import { Error404Component } from './error404/error404.component';
 import { UserManagementComponent } from './user-management/user-management.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -27,7 +26,6 @@ import { ToastrModule } from 'ngx-toastr';
     FooterComponent,
     SearchComponent,
     DetailsComponent,
-    UserCommentsComponent,
     Error404Component,
     UserManagementComponent
   ],

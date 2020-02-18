@@ -5,10 +5,10 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.web.servlet.support.SpringBootServletInitializer;
 
 @SpringBootApplication
-public class CineApplication extends SpringBootServletInitializer {
+public class VideogameApplication extends SpringBootServletInitializer {
 
 	public static void main(String[] args) {
-		SpringApplication.run(CineApplication.class, args);
+		SpringApplication.run(VideogameApplication.class, args);
 	}
 
 }
