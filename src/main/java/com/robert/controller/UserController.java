@@ -17,7 +17,7 @@ import com.robert.dto.UserDTO;
 import com.robert.service.UserService;
 
 @RestController
-@CrossOrigin(origins = "http://localhost:4200")
+@CrossOrigin(origins = "http://localhost:8100")
 @RequestMapping("/")
 public class UserController {
 	

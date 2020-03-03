@@ -17,7 +17,7 @@ import com.robert.dto.VideogameDTO;
 import com.robert.service.VideogameService;
 
 @RestController
-@CrossOrigin(origins = "http://localhost:4200")
+@CrossOrigin(origins = "http://localhost:8100")
 @RequestMapping("/")
 public class VideogamesController {
 	@Autowired

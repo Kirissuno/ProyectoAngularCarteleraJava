@@ -16,7 +16,7 @@ import com.robert.dto.CommentDTO;
 import com.robert.service.CommentService;
 
 @RestController
-@CrossOrigin(origins = "http://localhost:4200")
+@CrossOrigin(origins = "http://localhost:8100")
 @RequestMapping("/")
 public class CommentController {
 

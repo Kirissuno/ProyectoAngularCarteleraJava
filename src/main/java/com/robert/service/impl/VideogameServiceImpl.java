@@ -24,7 +24,7 @@ public class VideogameServiceImpl implements VideogameService {
 		List<Videogame> pelisBD = gameRepo.findAll();
 		List<VideogameDTO> pelisDTO = new ArrayList<VideogameDTO>();
 		for(Videogame peli : pelisBD) {
-			pelisDTO.add(new VideogameDTO(peli.getDirector(), peli.getTitulo(), peli.getDescription(), peli.getUrlImage(), peli.getFecha()));
+			pelisDTO.add(new VideogameDTO(peli.getDirector(), peli.getTitulo(), peli.getDescription(), peli.getUrlImage(), peli.getFecha(), peli.getPrecio()));
 		}
 		return pelisDTO;
 	}
@@ -34,7 +34,7 @@ public class VideogameServiceImpl implements VideogameService {
 		List<Videogame> pelisBD = gameRepo.getValidVideogames();
 		List<VideogameDTO> pelisDTO = new ArrayList<VideogameDTO>();
 		for(Videogame peli : pelisBD) {
-			pelisDTO.add(new VideogameDTO(peli.getDirector(), peli.getTitulo(), peli.getDescription(), peli.getUrlImage(), peli.getFecha()));
+			pelisDTO.add(new VideogameDTO(peli.getDirector(), peli.getTitulo(), peli.getDescription(), peli.getUrlImage(), peli.getFecha(), peli.getPrecio()));
 		}
 		return pelisDTO;
 	}
@@ -44,7 +44,7 @@ public class VideogameServiceImpl implements VideogameService {
 		List<Videogame> pelisBD = gameRepo.getExpiredVideogames();
 		List<VideogameDTO> pelisDTO = new ArrayList<VideogameDTO>();
 		for(Videogame peli : pelisBD) {
-			pelisDTO.add(new VideogameDTO(peli.getDirector(), peli.getTitulo(), peli.getDescription(), peli.getUrlImage(), peli.getFecha()));
+			pelisDTO.add(new VideogameDTO(peli.getDirector(), peli.getTitulo(), peli.getDescription(), peli.getUrlImage(), peli.getFecha(), peli.getPrecio()));
 		}
 		return pelisDTO;
 	}
@@ -54,7 +54,7 @@ public class VideogameServiceImpl implements VideogameService {
 		Optional<Videogame> gameBbDd = gameRepo.findById(titulo);
 		if(gameBbDd.isPresent()) {
 			Videogame gameBD = gameBbDd.get();
-			return new VideogameDTO(gameBD.getDirector(), gameBD.getTitulo(), gameBD.getDescription(), gameBD.getUrlImage(), gameBD.getFecha());
+			return new VideogameDTO(gameBD.getDirector(), gameBD.getTitulo(), gameBD.getDescription(), gameBD.getUrlImage(), gameBD.getFecha(), gameBD.getPrecio());
 		}else {
 			return null;
 		}
@@ -62,7 +62,7 @@ public class VideogameServiceImpl implements VideogameService {
 
 	@Override
 	public void saveVideogame(VideogameDTO videogame) {
-		Videogame newGame = new Videogame(videogame.getDirector(), videogame.getTitulo(), videogame.getDescripcion(), videogame.getUrlImage(), videogame.getFecha());		
+		Videogame newGame = new Videogame(videogame.getDirector(), videogame.getTitulo(), videogame.getDescripcion(), videogame.getUrlImage(), videogame.getFecha(), videogame.getPrecio());		
 		if(gameRepo.findById(newGame.getTitulo()).isPresent()) {
 			throw new ResourceNotFoundException("Juego con ese titulo ya existente");
 		}else {
@@ -100,7 +100,7 @@ public class VideogameServiceImpl implements VideogameService {
 		List<Videogame> gameBD = gameRepo.getVideogamesByDirector(director);
 		List<VideogameDTO> games= new ArrayList<VideogameDTO>();
 		for(Videogame peli : gameBD) {
-			games.add(new VideogameDTO(peli.getDirector(), peli.getTitulo(), peli.getDescription(), peli.getUrlImage(), peli.getFecha()));
+			games.add(new VideogameDTO(peli.getDirector(), peli.getTitulo(), peli.getDescription(), peli.getUrlImage(), peli.getFecha(), peli.getPrecio()));
 		}
 		return games;
 	}

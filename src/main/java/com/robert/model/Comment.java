@@ -25,6 +25,7 @@ public class Comment  {
 	private String comentario;
 	@NotNull
 	private String usuario;
+	
 	public Comment() {
 		super();
 		// TODO Auto-generated constructor stub

@@ -30,14 +30,17 @@ public class Videogame implements Serializable{
 	private String urlImage;
 	@NotNull
 	private Date fecha;
+	@NotNull
+	private Double precio;
 	
-	public Videogame(String director, String titulo, String descripcion, String url, Date fecha) {
+	public Videogame(String director, String titulo, String descripcion, String url, Date fecha, Double precio) {
 		super();
 		this.director = director;
 		this.titulo = titulo;
 		this.descripcion = descripcion;
 		this.urlImage = url;
 		this.fecha = fecha;
+		this.precio = precio;
 	}
 	public Videogame() {
 		super();
@@ -73,6 +76,12 @@ public class Videogame implements Serializable{
 	}
 	public void setFecha(Date fecha) {
 		this.fecha = fecha;
+	}
+	public Double getPrecio() {
+		return precio;
+	}
+	public void setPrecio(Double precio) {
+		this.precio = precio;
 	}
 	
 	
