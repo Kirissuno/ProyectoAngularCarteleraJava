@@ -16,5 +16,5 @@ public interface ShoppingCartRepository extends JpaRepository<ShoppingCart, Stri
 	
 	@Query("select sc from ShoppingCart sc where usuario = ?1")
 	public List<ShoppingCart> allSCByUser(String usuario);
-	
+		
 }

@@ -6,13 +6,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.robert.dto.UserDTO;
-import com.robert.dto.VideogameDTO;
 import com.robert.model.ShoppingCart;
 import com.robert.service.ShoppingCartService;
 
@@ -24,23 +23,23 @@ public class ShoppingCartController {
 	@Autowired
 	private ShoppingCartService shoppingService;
 	
-	@PostMapping("/cart")
-	public void addGame(@RequestBody VideogameDTO game, @RequestBody UserDTO user ) {
+	@PostMapping("/cart/{user}")
+	public void addGame(@RequestBody String game, @PathVariable String user ) {
 		shoppingService.addGame(game, user);
 	}
 	
-	@PostMapping("/cart/more")
-	public void addOneMore(@RequestBody VideogameDTO game, @RequestBody UserDTO user ) {
+	@PostMapping("/cart/more/{game}/{user}")
+	public void addOneMore(@PathVariable String game, @PathVariable String user ) {
 		shoppingService.addOneMore(game, user);
 	}
 	
-	@PostMapping("/cart/less")
-	public void removeOne(@RequestBody VideogameDTO game, @RequestBody UserDTO user) {
+	@PostMapping("/cart/less/{game}/{user}")
+	public void removeOne(@PathVariable String game, @PathVariable String user) {
 		shoppingService.removeOne(game, user);
 	}
 	
-	@DeleteMapping("/cart")
-	public void removeGame(VideogameDTO game, UserDTO user) {
+	@DeleteMapping("/cart/{user}/{game}")
+	public void removeGame(@PathVariable String user, @PathVariable String game) {
 		shoppingService.removeGame(game, user);
 	}
 	
@@ -49,9 +48,14 @@ public class ShoppingCartController {
 		return shoppingService.getCarts();
 	}
 
-	@GetMapping("/cart")
-	public List<ShoppingCart> getCartByUser(@RequestBody UserDTO user) {
+	@GetMapping("/cart/{user}")
+	public List<ShoppingCart> getCartByUser(@PathVariable String user) {
 		return shoppingService.getCartByUser(user);
+	}
+	
+	@GetMapping("/cart/{user}/{game}")
+	public ShoppingCart getGameInCar(@PathVariable String user, @PathVariable String game) {
+		return shoppingService.getCartByUserAndGame(user, game);
 	}
 
 }

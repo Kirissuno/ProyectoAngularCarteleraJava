@@ -94,9 +94,9 @@ public class VideogameServiceImpl implements VideogameService {
 			updateGame.setFecha(videogame.getFecha());
 			updateGame.setDescription(videogame.getDescripcion());
 			updateGame.setUrlImage(videogame.getUrlImage());
+			updateGame.setPrecio(videogame.getPrecio());
+			updateGame.setStock(videogame.getStock());
 			gameRepo.save(updateGame);
-		}else {
-			throw new ResourceNotFoundException("Juego a actualizar inexistente");
 		}
 	}
 

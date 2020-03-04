@@ -7,8 +7,6 @@ import javax.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.robert.dto.UserDTO;
-import com.robert.dto.VideogameDTO;
 import com.robert.model.ShoppingCart;
 import com.robert.repository.ShoppingCartRepository;
 import com.robert.service.ShoppingCartService;
@@ -21,22 +19,22 @@ public class ShoppingCartServiceImpl implements ShoppingCartService {
 	
 	@Override
 	@Transactional
-	public void addGame(VideogameDTO game, UserDTO user) {
-		shoppingRepository.save(new ShoppingCart(user.getUsuario(), game.getTitulo(), 1));		
+	public void addGame(String game, String user) {
+		shoppingRepository.save(new ShoppingCart(user, game, 1));		
 	}
 
 	@Override
 	@Transactional
-	public void addOneMore(VideogameDTO game, UserDTO user) {
-		ShoppingCart cart = shoppingRepository.getShoppingCart(game.getTitulo(), user.getUsuario());
+	public void addOneMore(String game, String user) {
+		ShoppingCart cart = shoppingRepository.getShoppingCart(game, user);
 		cart.setCantidad(cart.getCantidad()+1);
 		shoppingRepository.save(cart);
 	}
 
 	@Override
 	@Transactional
-	public void removeOne(VideogameDTO game, UserDTO user) {
-		ShoppingCart cart = shoppingRepository.getShoppingCart(game.getTitulo(), user.getUsuario());
+	public void removeOne(String game, String user) {
+		ShoppingCart cart = shoppingRepository.getShoppingCart(game, user);
 		if(cart.getCantidad() > 1) {
 			cart.setCantidad(cart.getCantidad()-1);
 			shoppingRepository.save(cart);
@@ -47,8 +45,8 @@ public class ShoppingCartServiceImpl implements ShoppingCartService {
 
 	@Override
 	@Transactional
-	public void removeGame(VideogameDTO game, UserDTO user) {
-		ShoppingCart cart = shoppingRepository.getShoppingCart(game.getTitulo(), user.getUsuario());
+	public void removeGame(String game, String user) {
+		ShoppingCart cart = shoppingRepository.getShoppingCart(game, user);
 		shoppingRepository.delete(cart);
 	}
 
@@ -58,10 +56,14 @@ public class ShoppingCartServiceImpl implements ShoppingCartService {
 	}
 
 	@Override
-	public List<ShoppingCart> getCartByUser(UserDTO user) {
-		return shoppingRepository.allSCByUser(user.getUsuario());
+	public List<ShoppingCart> getCartByUser(String user) {
+		return shoppingRepository.allSCByUser(user);
 	}
 	
+	@Override
+	public ShoppingCart getCartByUserAndGame(String user, String game) {
+		return shoppingRepository.getShoppingCart(game, user);
+	}
 	
 
 }
