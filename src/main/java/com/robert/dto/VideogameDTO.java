@@ -10,12 +10,13 @@ public class VideogameDTO {
 	private String urlImage;
 	private Date fecha;
 	private Double precio;
+	private Integer stock;
 	
 	public VideogameDTO() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
-	public VideogameDTO(String director, String titulo, String descripcion, String url, Date fecha, Double precio) {
+	public VideogameDTO(String director, String titulo, String descripcion, String url, Date fecha, Double precio, Integer stock) {
 		super();
 		this.director = director;
 		this.titulo = titulo;
@@ -23,6 +24,7 @@ public class VideogameDTO {
 		this.descripcion = descripcion;
 		this.urlImage = url;
 		this.precio = precio;
+		this.stock = stock;
 	}
 	public String getDirector() {
 		return director;
@@ -60,6 +62,12 @@ public class VideogameDTO {
 	}
 	public void setPrecio(Double precio) {
 		this.precio = precio;
+	}
+	public Integer getStock() {
+		return stock;
+	}
+	public void setStock(Integer stock) {
+		this.stock = stock;
 	}
 	
 	

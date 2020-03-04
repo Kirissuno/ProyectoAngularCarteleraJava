@@ -32,8 +32,10 @@ public class Videogame implements Serializable{
 	private Date fecha;
 	@NotNull
 	private Double precio;
+	@NotNull
+	private Integer stock;
 	
-	public Videogame(String director, String titulo, String descripcion, String url, Date fecha, Double precio) {
+	public Videogame(String director, String titulo, String descripcion, String url, Date fecha, Double precio, Integer stock) {
 		super();
 		this.director = director;
 		this.titulo = titulo;
@@ -41,6 +43,7 @@ public class Videogame implements Serializable{
 		this.urlImage = url;
 		this.fecha = fecha;
 		this.precio = precio;
+		this.stock = stock;
 	}
 	public Videogame() {
 		super();
@@ -82,6 +85,12 @@ public class Videogame implements Serializable{
 	}
 	public void setPrecio(Double precio) {
 		this.precio = precio;
+	}
+	public Integer getStock() {
+		return stock;
+	}
+	public void setStock(Integer stock) {
+		this.stock = stock;
 	}
 	
 	

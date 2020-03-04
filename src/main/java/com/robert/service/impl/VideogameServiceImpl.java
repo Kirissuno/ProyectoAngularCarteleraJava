@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
+import javax.transaction.Transactional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -24,7 +26,7 @@ public class VideogameServiceImpl implements VideogameService {
 		List<Videogame> pelisBD = gameRepo.findAll();
 		List<VideogameDTO> pelisDTO = new ArrayList<VideogameDTO>();
 		for(Videogame peli : pelisBD) {
-			pelisDTO.add(new VideogameDTO(peli.getDirector(), peli.getTitulo(), peli.getDescription(), peli.getUrlImage(), peli.getFecha(), peli.getPrecio()));
+			pelisDTO.add(new VideogameDTO(peli.getDirector(), peli.getTitulo(), peli.getDescription(), peli.getUrlImage(), peli.getFecha(), peli.getPrecio(), peli.getStock()));
 		}
 		return pelisDTO;
 	}
@@ -34,7 +36,7 @@ public class VideogameServiceImpl implements VideogameService {
 		List<Videogame> pelisBD = gameRepo.getValidVideogames();
 		List<VideogameDTO> pelisDTO = new ArrayList<VideogameDTO>();
 		for(Videogame peli : pelisBD) {
-			pelisDTO.add(new VideogameDTO(peli.getDirector(), peli.getTitulo(), peli.getDescription(), peli.getUrlImage(), peli.getFecha(), peli.getPrecio()));
+			pelisDTO.add(new VideogameDTO(peli.getDirector(), peli.getTitulo(), peli.getDescription(), peli.getUrlImage(), peli.getFecha(), peli.getPrecio(), peli.getStock()));
 		}
 		return pelisDTO;
 	}
@@ -44,7 +46,7 @@ public class VideogameServiceImpl implements VideogameService {
 		List<Videogame> pelisBD = gameRepo.getExpiredVideogames();
 		List<VideogameDTO> pelisDTO = new ArrayList<VideogameDTO>();
 		for(Videogame peli : pelisBD) {
-			pelisDTO.add(new VideogameDTO(peli.getDirector(), peli.getTitulo(), peli.getDescription(), peli.getUrlImage(), peli.getFecha(), peli.getPrecio()));
+			pelisDTO.add(new VideogameDTO(peli.getDirector(), peli.getTitulo(), peli.getDescription(), peli.getUrlImage(), peli.getFecha(), peli.getPrecio(), peli.getStock()));
 		}
 		return pelisDTO;
 	}
@@ -54,15 +56,16 @@ public class VideogameServiceImpl implements VideogameService {
 		Optional<Videogame> gameBbDd = gameRepo.findById(titulo);
 		if(gameBbDd.isPresent()) {
 			Videogame gameBD = gameBbDd.get();
-			return new VideogameDTO(gameBD.getDirector(), gameBD.getTitulo(), gameBD.getDescription(), gameBD.getUrlImage(), gameBD.getFecha(), gameBD.getPrecio());
+			return new VideogameDTO(gameBD.getDirector(), gameBD.getTitulo(), gameBD.getDescription(), gameBD.getUrlImage(), gameBD.getFecha(), gameBD.getPrecio(), gameBD.getStock());
 		}else {
 			return null;
 		}
 	}
 
 	@Override
+	@Transactional
 	public void saveVideogame(VideogameDTO videogame) {
-		Videogame newGame = new Videogame(videogame.getDirector(), videogame.getTitulo(), videogame.getDescripcion(), videogame.getUrlImage(), videogame.getFecha(), videogame.getPrecio());		
+		Videogame newGame = new Videogame(videogame.getDirector(), videogame.getTitulo(), videogame.getDescripcion(), videogame.getUrlImage(), videogame.getFecha(), videogame.getPrecio(), videogame.getStock());		
 		if(gameRepo.findById(newGame.getTitulo()).isPresent()) {
 			throw new ResourceNotFoundException("Juego con ese titulo ya existente");
 		}else {
@@ -71,6 +74,7 @@ public class VideogameServiceImpl implements VideogameService {
 	}
 
 	@Override
+	@Transactional
 	public void deleteByTitle(String titulo) {
 		Optional<Videogame> gameBD = gameRepo.findById(titulo);
 		if(gameBD.isPresent()) {
@@ -82,6 +86,7 @@ public class VideogameServiceImpl implements VideogameService {
 	}
 
 	@Override
+	@Transactional
 	public void updateVideogame(VideogameDTO videogame, String title) {
 		if(gameRepo.findById(title).isPresent()) {
 			Videogame updateGame = gameRepo.findById(title).get();
@@ -100,7 +105,7 @@ public class VideogameServiceImpl implements VideogameService {
 		List<Videogame> gameBD = gameRepo.getVideogamesByDirector(director);
 		List<VideogameDTO> games= new ArrayList<VideogameDTO>();
 		for(Videogame peli : gameBD) {
-			games.add(new VideogameDTO(peli.getDirector(), peli.getTitulo(), peli.getDescription(), peli.getUrlImage(), peli.getFecha(), peli.getPrecio()));
+			games.add(new VideogameDTO(peli.getDirector(), peli.getTitulo(), peli.getDescription(), peli.getUrlImage(), peli.getFecha(), peli.getPrecio(), peli.getStock()));
 		}
 		return games;
 	}

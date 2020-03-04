@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
+import javax.transaction.Transactional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -18,11 +20,13 @@ public class CommentServiceImpl implements CommentService {
 	private CommentRepository commentRepository;
 	
 	@Override
+	@Transactional
 	public void addComment(CommentDTO comment) {
 		commentRepository.save(new Comment(comment.getTitulo(), comment.getComentario(), comment.getUsuario()));
 	}
 
 	@Override
+	@Transactional
 	public void deleteComment(Integer commentID) {
 		Optional<Comment> comm = commentRepository.findById(commentID);
 		if(comm.isPresent()) {

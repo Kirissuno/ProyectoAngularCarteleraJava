@@ -2,6 +2,8 @@ package com.robert.service.impl;
 
 import java.util.List;
 
+import javax.transaction.Transactional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -18,11 +20,13 @@ public class ShoppingCartServiceImpl implements ShoppingCartService {
 	private ShoppingCartRepository shoppingRepository;
 	
 	@Override
+	@Transactional
 	public void addGame(VideogameDTO game, UserDTO user) {
 		shoppingRepository.save(new ShoppingCart(user.getUsuario(), game.getTitulo(), 1));		
 	}
 
 	@Override
+	@Transactional
 	public void addOneMore(VideogameDTO game, UserDTO user) {
 		ShoppingCart cart = shoppingRepository.getShoppingCart(game.getTitulo(), user.getUsuario());
 		cart.setCantidad(cart.getCantidad()+1);
@@ -30,6 +34,7 @@ public class ShoppingCartServiceImpl implements ShoppingCartService {
 	}
 
 	@Override
+	@Transactional
 	public void removeOne(VideogameDTO game, UserDTO user) {
 		ShoppingCart cart = shoppingRepository.getShoppingCart(game.getTitulo(), user.getUsuario());
 		if(cart.getCantidad() > 1) {
@@ -41,6 +46,7 @@ public class ShoppingCartServiceImpl implements ShoppingCartService {
 	}
 
 	@Override
+	@Transactional
 	public void removeGame(VideogameDTO game, UserDTO user) {
 		ShoppingCart cart = shoppingRepository.getShoppingCart(game.getTitulo(), user.getUsuario());
 		shoppingRepository.delete(cart);

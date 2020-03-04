@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
+import javax.transaction.Transactional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -29,6 +31,7 @@ public class UserServiceImpl implements UserService {
 	}
 
 	@Override
+	@Transactional
 	public void updateUser(UserDTO usuario) {
 		Optional<User> userBD = userRepository.findById(usuario.getUsuario());
 		if(userBD.isPresent()) {
@@ -40,6 +43,7 @@ public class UserServiceImpl implements UserService {
 	}
 
 	@Override
+	@Transactional
 	public void addUser(UserDTO usuario) {
 		Optional<User> userBD = userRepository.findById(usuario.getUsuario());
 		if(!userBD.isPresent()) {			
@@ -69,6 +73,7 @@ public class UserServiceImpl implements UserService {
 	}
 	
 	@Override
+	@Transactional
 	public void deleteUser(String user) {
 		userRepository.delete(userRepository.findById(user).orElseThrow(() -> new ResourceNotFoundException("Usuario inexistente")));
 	}
