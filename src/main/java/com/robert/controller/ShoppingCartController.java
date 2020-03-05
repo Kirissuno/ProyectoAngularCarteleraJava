@@ -1,6 +1,7 @@
 package com.robert.controller;
 
 import java.util.List;
+import java.util.Properties;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -14,6 +15,9 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.robert.model.ShoppingCart;
 import com.robert.service.ShoppingCartService;
+import javax.mail.*;
+import javax.mail.internet.InternetAddress;
+import javax.mail.internet.MimeMessage;
 
 @RestController
 @CrossOrigin(origins = "http://localhost:8100")
@@ -56,6 +60,50 @@ public class ShoppingCartController {
 	@GetMapping("/cart/{user}/{game}")
 	public ShoppingCart getGameInCar(@PathVariable String user, @PathVariable String game) {
 		return shoppingService.getCartByUserAndGame(user, game);
+	}
+	
+	@PostMapping("/cart/sendMail/{usuario}")
+	public void sendMail(@RequestBody List<ShoppingCart> carts, @PathVariable String usuario) {
+		
+		final String username = "javarobertsmtp@gmail.com";
+        final String password = "Asdfghjk1@";
+        
+        String allGames = "";
+        
+        for(ShoppingCart cart : carts) {
+        	allGames += cart.getVideojuego() + " x" + cart.getCantidad() + " unidades | ";
+        }
+        
+        Properties prop = new Properties();
+		prop.put("mail.smtp.host", "smtp.gmail.com");
+        prop.put("mail.smtp.port", "587");
+        prop.put("mail.smtp.auth", "true");
+        prop.put("mail.smtp.starttls.enable", "true"); //TLS
+		
+        Session session = Session.getInstance(prop,
+                new javax.mail.Authenticator() {
+                    protected PasswordAuthentication getPasswordAuthentication() {
+                        return new PasswordAuthentication(username, password);
+                    }
+                });
+
+        try {
+
+            Message message = new MimeMessage(session);
+            message.setFrom(new InternetAddress("javarobertsmtp@gmail.com"));
+            message.setRecipients(
+                    Message.RecipientType.TO,
+                    InternetAddress.parse("arfilip.1h@gmail.com")
+            );
+            message.setSubject("Compras");
+            message.setText("El usuario "+ usuario + " ha hecho su pedido de los siguientes videojuegos " + allGames +" ,"
+                    + "\n\n Please do not spam my email!");
+
+            Transport.send(message);
+
+        } catch (MessagingException e) {
+            e.printStackTrace();
+        }
 	}
 
 }
